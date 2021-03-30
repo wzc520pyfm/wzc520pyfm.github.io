@@ -1,1 +1,137 @@
+---
+layout: post
+title: 'Flutter项目运行突然报错与证书问题'
+date: 2021-03-30
+author: lalala
+cover: 'http://on2171g4d.bkt.clouddn.com/jekyll-banner.png'
+tags: flutter
+---
 
+> Transform your plain text into static websites and blogs.
+
+### Flutter项目运行突然报错与证书问题
+ 
+
+[TOC]
+
+
+#####踩坑记录:   
+
+- 1.项目莫名其妙报错,运行不起来
+- 2.网络/证书问题
+- 3.虚拟机运行不起来
+
+
+#####描述一: 项目之前是可以运行的,但是突然出现错误.。
+报错如下：
+ ![](https://raw.githubusercontent.com/wzc520pyfm/Picbed_PicGo/master/img/flutter_%E8%BF%90%E8%A1%8C%E6%8A%A5%E9%94%991.1.png)
+
+#####描述一解决方案: 
+
+- 1. import Project
+
+![](https://raw.githubusercontent.com/wzc520pyfm/Picbed_PicGo/master/img/import_project.png)
+
+
+- 2.选择对应项目下的Android,点击OK 
+
+![](https://raw.githubusercontent.com/wzc520pyfm/Picbed_PicGo/master/img/chose.png)
+
+- 3.进去后会自动重构,(下面会有进度条在一直刷新),点击下面的小锤子可以查看进度.
+如果没有自动开始,则在上面点击小锤子重构.
+(前提是你的项目本来是可以运行的,突然出现问题导致报错.)
+
+- 4.如果一切正常,应该会提示成功:
+
+![](https://raw.githubusercontent.com/wzc520pyfm/Picbed_PicGo/master/img/success.png)
+
+但不保证你一定会成功,可以会遇到问题,请继续往下看.
+
+- 5. 如果第4步你顺利地成功了,你可以  File->close project, 然后Open an existing AS project->选择刚刚的项目文件: 以我的为例: 
+
+![](https://raw.githubusercontent.com/wzc520pyfm/Picbed_PicGo/master/img/flutter_chose_project.png)
+
+![](https://raw.githubusercontent.com/wzc520pyfm/Picbed_PicGo/master/img/flutter_open_project.png)
+
+现在你可以正常运行你的flutter项目了.
+
+- 6.如果你在第3步或者第4步出错了,请阅读接下来的部分,我们来试着解决.
+
+- 6.1 如果你的项目是刚刚建好,但是执行上述步骤出现报错,如果你的问题是由于网络问题,则可以参考: (其实添加镜像可以解决大多网络问题,不单单针对上述错误)
+
+执行完前三步后, 
+- 6.1.1 添加阿里仓库:
+![](https://raw.githubusercontent.com/wzc520pyfm/Picbed_PicGo/master/img/flutter_ali_maven.png)
+
+![](https://raw.githubusercontent.com/wzc520pyfm/Picbed_PicGo/master/img/flutter_ali_maven2.png)
+
+所添加的代码如下:(两处代码是一样的)
+
+```
+//阿里Maven仓库
+    maven { url'https://maven.aliyun.com/repository/public/' }
+    maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+    maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
+    maven { url 'http://maven.aliyun.com/nexus/content/repositories/google' }
+    maven { url 'http://maven.aliyun.com/nexus/content/repositories/gradle-plugin' }
+    maven { url 'https://maven.aliyun.com/repository/central/' }
+
+```
+
+- 6.1.2 在src/build.gradle内将测试相关代码注释:
+![](https://raw.githubusercontent.com/wzc520pyfm/Picbed_PicGo/master/img/flutter_build_gradle.png)
+
+![](https://raw.githubusercontent.com/wzc520pyfm/Picbed_PicGo/master/img/flutter_build_gradle2.png)
+
+- 6.2 继续重构,重构完成后File->Close Project
+
+- 6.3 如果你在6.2 中再次重构仍然失败,那么打开: 
+![](https://raw.githubusercontent.com/wzc520pyfm/Picbed_PicGo/master/img/flutter_try_again.png)
+
+点击上面蓝色字—Try Agein  (因为我已经点过了,所以显示不一样)
+
+然后就会再次开始build(可以看到下面已经开始运行,不断会有读条)
+
+-6.4 如果最终报错: Module 'path_provider': platform 'android-27' not found.
+其中27是 android API的级别，并不是版本号，它与版本号是一一对应的关系，下面介绍一下这个错误的处理方法。
+
+- 6.4.1 	选择菜单 Tools->SDK Manager
+![](https://raw.githubusercontent.com/wzc520pyfm/Picbed_PicGo/master/img/flutter_tool.png)
+
+- 6.4.2 进入如图界面，在表格中找到API Level 是27的选项并勾选，然后点击ok按钮。
+![](https://raw.githubusercontent.com/wzc520pyfm/Picbed_PicGo/master/img/flutter_android27.png)
+
+- 6.4.3 点击ok按钮后进入下载页面，下载对应API Level的sdk。
+![](https://raw.githubusercontent.com/wzc520pyfm/Picbed_PicGo/master/img/flutter_27_downing.png)
+
+- 6.4.4 下载完成后，选择菜单File->Sync Project Width Gradle Files, 来刷新项目，这样ERROR: Module 'app': platform 'android-27' not found. 将消失。
+![](https://raw.githubusercontent.com/wzc520pyfm/Picbed_PicGo/master/img/flutter_27_success.png)
+
+现在应该是可以了.
+![](https://raw.githubusercontent.com/wzc520pyfm/Picbed_PicGo/master/img/success.png)
+
+去打开你的项目运行吧.
+
+
+#####描述二: 虚拟机总是安装失败,或无法启动:
+我的方法是安装一个模拟器,对,就是电脑上玩王者荣耀的那种模拟器.
+安装好夜神模拟器. 
+![](https://raw.githubusercontent.com/wzc520pyfm/Picbed_PicGo/master/img/flutter_yeshen.png)
+
+在AS
+内打开项目的同时也打开夜神.
+如过AS没有自动连接到夜神,运行这个文件(运行后等待一下,不行多运行几次)
+![](https://raw.githubusercontent.com/wzc520pyfm/Picbed_PicGo/master/img/flutter_yeshen_nox.png)(这个文件电脑上都有)(如果找不到,请读者百度查找一下位置,或者如何命令行连接夜神虚拟器)
+
+
+如果还是连接不到夜神,桌面右键打开Git Bash Here  一直cd进存放项目的目录,(这是as和夜神是打开的),运行几次Nox.bat程序,最好是显示5037 on port(端口畅通)
+在Git Bash Here内继续输入adb devices执行
+如果出现类似127.0.0.1:62001 devices的结果,则说明连接成功,返回AS即可看到已连接夜神,(显示的会是某一种手机型号,例如我的是OPPO R11 Plus).如果没有出现127.0.0.1:62001 devices, 那就多试几次. 同样的步骤在VSCode内连接模拟器也是一样的.
+
+#####补充:  
+
+热更新功能好像不能热更新图片,如果在写代码调试的时候发现本地图片死活不能显示在页面上,试着Close project重新打开吧(重新运行,不是热更新)
+
+
+
+-------------------
