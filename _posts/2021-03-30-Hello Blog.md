@@ -69,7 +69,7 @@ https://blog.csdn.net/qq_36361250/article/details/89920612?utm_medium=distribute
 ![](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/github_0.9%252B1.png)
 
 
-###1   让博客变得漂亮
+### 1   让博客变得漂亮
 但现在这个博客页面有点丑.反正就是不满意,我们去整个新的(好看的)
 (参考博客: 
  https://zhengqing.blog.csdn.net/article/details/90765491?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-9.control&dist_request_id=&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-9.control)
