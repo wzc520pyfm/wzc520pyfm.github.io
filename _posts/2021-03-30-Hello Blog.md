@@ -66,7 +66,7 @@ https://blog.csdn.net/qq_36361250/article/details/89920612?utm_medium=distribute
 修改完点击底端的Commit Changes  即可保存修改:
 
 看一下效果:
-![](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/github_0.9%252B1.png)
+![](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/github2_0.1.png)
 
 
 ### 1   让博客变得漂亮
@@ -123,12 +123,12 @@ https://www.wzc520pyf.cn/     )
 ![](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/github_1.9.png)
 
 打开第一个来看看:
-![](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/github_1.9%252B1.png)
+![](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/github2_0.2.png)
 
 点击铅笔图标进入编辑:
 
 每篇博客开头都应有一些头信息: 
-![](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/github_1.9%252B2.png)
+![](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/github2_0.3.png)
 
 
 下面的内容可以看出就是熟悉的Markdown标记语法.
@@ -203,68 +203,70 @@ Description是对这个仓库的描述.
 ![](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/github_2.9.png)
 
 拉到底部:
-![](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/github_2.9%252B1.png)
+![](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/github2_0.5.png)
 
 点击创建即可.
 
 回到刚刚的仓库可以看到:
-![](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/github_2.9%252B2.png)
+![](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/github2_0.6.png)
 
 Ok,现在打开前面安装好的PicGo(双击打开),打开后的界面如下:
-![](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/github_2.9%252B3.png)
+![](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/github2_0.7.png)
 
 点击左边的图层设置部分的GitHub图床: 
-![](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/github_2.9%252B4.png)
+![](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/github2_0.8.png)
 
 仓库名就是刚刚在github建好的仓库:
-![](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/github_2.9%252B5.png)
+![](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/github2_0.9.png)
 
 分支名就是刚刚在仓库新建的master分支.
 指定存储路径就是刚刚在仓库新建的文件夹img
-![](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/github_2.9%252B6.png)
+![](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/github2_1.0.png)
 
 自定义域名可不填.
 
 最后是Token!
 这相当于是一个代替密码验证的密钥,要注意保管,要去github里去建:
-![](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/github_2.9%252B7.png)
+![](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/github2_1.1.png)
 
-![](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/github_2.9%252B8.png)
+![](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/github2_1.2.png)
 
-![](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/github_2.9%252B9.png)
+![](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/github2_1.3.png)
 
-![](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/github_2.9%252B10.png)
+![](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/github2_1.5.png)
 
 Note是token的名字(便于你知道这个token是被用来干什么的)
 记得勾选repo 
-![](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/github_2.9%252B11.png)
+![](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/github2_1.6.png)
 
-![](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/github_2.9%252B12.png)
+![](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/github2_1.7.png)
 
-![](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/github_2.9%252B13.png)
+![](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/github2_1.8.png)
 
 这里就是你刚刚建好的token了复制保存好了,页面一旦关闭就再也看不到了.
 
 把刚刚复制的token粘贴到PicGo里:
-![](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/github_2.9%252B14.png)
+![](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/github2_1.9.png)
 
 点击确定,系统会提醒设置成功.
 
 
 切换到PicGo的上传区:
 
-![](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/github_2.9%252B15.png)
+![](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/github2_2.0.png)
 
 把任意图片拖进来:
-![](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/github_2.9%252B16.png)
+![](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/github2_2.1.png)
+
 
 右下角提示成功:
-![](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/github_2.9%252B17.png)
+![](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/github2_2.2.png)
 
 现在Markdown形式的图片地址就已经在你的剪贴板了.
 
 我们打开马克飞象(前面提到的博客编辑器)网页版,直接右键粘贴来试一下:
-![](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/github_2.9%252B18.png)
+![](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/github2_2.3.png)
+
 
 左边即是我们刚刚粘贴进去的内容.
 
