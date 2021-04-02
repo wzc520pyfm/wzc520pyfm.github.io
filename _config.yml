@@ -1,7 +1,7 @@
 # Site settings 配置站点
 title: 'lalala的博客'
 description: 'If give me more time'
-keyword: 'lalala, lalala的独立博客, 前端, 前端开发, javascript, vuejs, nodejs, 设计'
+keyword: 'lalala, lalala的独立博客, 前端, 后端开发,Flutter开发,Unity游戏开发,C混合编程, javascript, vuejs, nodejs,java,Dart,C++,C#, 设计'
 url: '' # your host
 
 # when build blog on server, if you don't need baseurl, you should leave this value blank.
