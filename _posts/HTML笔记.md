@@ -1,0 +1,1155 @@
+[toc]
+
+
+
+### HTML语法基础
+
+* html最小单位
+  * Elenment(元素,标签)
+
+* 元素组成
+  * 其实标签+元素内容(可选,比如图片就没有)+元素属性(可选)+结束标签
+
+* /  <!DOCTYPE html>用于声明文件是html
+
+* VSC配置
+  * 在线打开html插件: Live Server
+  * vsc汉化插件:Chinese
+  * 开启自动保存: File->Auto save
+
+* 元素属性
+  * 全局属性:比如title,是所有标签都可访问的,title用于当鼠标悬停标签上时显示描述文本
+  * 局部属性:即某元素特有的属性,比如a标签的href
+
+* 浏览器操作:
+  * 在某元素上右击选择检查可快速定位Element元素
+
+* 注释
+  * Ctrl+/
+
+### HTML语义化
+
+* 每个html元素都有具体含义,这也解释了为什么html一般不怎么写注释
+  * 标题
+  * 段落
+  * 超链接
+  * 图片
+
+* 语义化的好处
+
+  * 利于seo(搜索引擎优化)
+    * 每隔一段时间,搜索引擎会在互联网中抓取页面源代码,语义化做的越好,排名也就越靠前
+
+  * 方便浏览器去理解网页结构
+
+
+
+### HTML文本元素
+
+* 标签元素
+  * h1  -  h6
+  * 一个页面只有一个h1标签
+
+* VSC快捷操作
+
+  * 输入`h1`  然后按TAB键    快速补全标签
+  * 光标停在h1   Alt+Shift+上下键   向上/下复制标签
+    * 光标停在h1   Alt+上下键   整行移动
+  * 输入 h1*6  然后按TAB键    生成6个h1标签
+  * 输入 h$*6  然后按TAB键    生成h1 ~  h6标签
+    * 使用{}携带文本, 输入h$*6{$级标题}  生成h1 ~  h6标签同时为每个标签指定内容
+    * 使用>指定嵌套标签,  输入h$*6>li   生成h1 ~  h6标签同时为每个标签内添加li标签
+    * 复杂一点的:  (h3{标题$}>p>lorem300)*3  生成3个h3标题, 其内容是标题$  且每个h3中嵌套一个有假文的p标签
+
+  * 格式化代码: Alt + Shift + F
+  * 按住Alt 可选中多处
+
+* 段落元素
+
+  * `p`
+
+* VSC快捷操作
+
+  * 假文: 输入p>lorem  回车/TAB   可生成一段无意义文本
+    * 生成更多假文: p>lorem1000
+
+  * 生成多个p标签并带有假文: p*6>lorem1000  可生成6个p标签,每一个都有假文,光标必须停在末尾才可以
+
+* `span`元素
+
+  * 没有任何语义
+  * 仅仅需要设置样式时使用此标签: 
+    * 比如 需要将  6级标题 中的 6级 设为红色, 可用span包裹 6级 ,再为span设置样式. 代码(因为此标签为Markdown支持的标签,所以会直接生效,将光标移至 6级 字样处可看到具体的代码展开): <h6><span style="color:red;">6级</span>标题</h6>
+
+  * 同样无意义的标签还有  i 标签  
+
+* `pre`元素(预格式化文本元素)
+
+  * 解决空白折叠问题
+    * 当希望按原样展示代码片段时会使用
+    * 当希望展示字符画时会使用
+  * 什么是空白折叠
+    * 源代码中连续的空白字符(空格、换行、制表（tab缩进）)会被折叠成一个空格
+
+
+
+### a元素
+
+* 作用
+
+  * 超链接
+    * 从这个页面跳转到另一个页面的路径
+    * 常用属性
+      * `href`  跳转路径
+      * `target`  打开方式, 默认当前页打开,设为blank则在新标签页打开
+
+  * 锚点
+
+    * 用于跳转到页面的指定位置
+      * 使用方法:  href="#index3"  #代表a标签将实现锚点功能, index3是元素id,此时点击a标签将跳转到名为index3 的元素位置处
+
+    * 实现目录功能的好帮手
+
+
+
+### 基础路径怎么写
+
+* 路径
+
+  根据资源的类型判断,一般站外资源用绝对路径,站内资源用相对路径
+
+  * 绝对路径
+
+    ```markdown
+    ## 输入```markdown  按回车即可出现这样的编辑框
+    ## 书写格式
+    ### 协议名://主机名:端口号/路径
+    #### 路径中的中文会被重新编码
+    
+    * 协议名 http  https  file
+    * 主机名  域名  IP地址
+    * 端口   http会省略80端口  https会省略443端口
+    ```
+
+    
+
+  * 相对路径
+
+    ```markdown
+    ##  ./代表当前目录
+    ##  ../代表上一级目录
+    ```
+
+    
+
+* 文件和文件夹命名尽量使用英文, 使用中文可能在部署到服务器上时出现乱码导致404
+
+
+
+### img
+
+* img标签没有结束标签
+
+* 常用属性
+  * `src`   图片链接 
+  * `alt`    图片加载不出来时显示, 常用于显示图片的描述性文本
+  * `title`  全局属性, 鼠标悬停时显示的文本内容, 常用于下手图片的描述性文本
+
+* 点击图片跳转
+  * a标签内嵌套img标签即可实现
+
+
+
+### 列表元素
+
+* 列表
+  * 有序列表  `ol`
+    * 子元素为li  li中可以包含其他元素,但不要使用其他元素包裹li元素
+  * 无序列表  `ul`
+    * 子元素为li  li中可以包含其他元素,但不要使用其他元素包裹li元素
+  * 定义列表  `dl`
+    * 子元素为`dt`  `dd`   dt中写专业名词   dd中写对应的解释
+    * 当需要描述专业术语时使用dl列表
+
+
+
+### 布局元素
+
+* 没有任何语义, 纯粹用于布局的元素
+
+  * HTML 4
+    * `div`
+
+  * HTML  5
+    * `header`  `footer`  `article` ...  头部  底部  文章  
+
+
+
+### CSS
+
+* 网页如何使用css
+  * `style`标签
+  * `link`引入
+    * link规定了当前文档与外部资源的关系,常用于链接样式表
+  * 标签内设置属性
+
+* 层叠样式表
+  * 如果声明了多条重名样式, 则只会生效最后声明的那一个
+
+* 选择器
+  * 告诉浏览器要设置样式的html元素
+
+* 声明块  即{}
+  * 用于设置样式
+
+
+
+### CSS的几种写法和推荐写法
+
+* 写法
+
+  * 内部样式
+    * 写在`style`标签内
+
+  * 内联样式表
+    * 写在元素的`style`属性内
+
+  * 外部样式表
+
+    * `link`标签将css资源引入
+
+      * link标签放在head标签内
+
+      * rel属性是资源类型, 使用css资源时值为stylesheet
+      * href属性为资源路径
+
+* 为什么选择外部样式表?
+
+  * 解决页面当中样式重复问题
+    * 如果多个网页都希望将h1标签设为红色, 只需要写一份css文件,各自通过link引入即可
+
+  * 代码分离, 利于代码维护和阅读
+  * 利于优化, 浏览器会将link引入的资源缓存起来, 提高页面响应速度
+
+
+
+### CSS场景选择器及使用场景
+
+* 同时选择多个时使用 ,  隔开
+  * 例如  h1, p, span{}
+
+* 基本选择器(写在style标签内或外部样式中)
+
+  * 元素(标签)选择器
+
+    * 写法:  h1{ }
+
+  * 类选择器
+
+    * 写法
+
+      * 先为h1标签添加属性:  class="h1_bgc"
+
+      * .h1_bgc{ }
+
+  * id选择器(多与JS配合)
+
+    * 写法
+      * 先为h1标签添加属性:  id="h1_id"
+      * #h1_id{ }
+
+* 开发中常用的选择器
+
+  * 通配符选择器  *  
+    * 匹配所有标签
+
+  * 派生选择器
+
+    * 根据文档dom结构来选择html元素
+
+    * 后代选择器
+
+      * 写法 p span{}  选择p标签中的span标签
+
+    * 子元素选择器
+
+      * 写法  div > span{}  选择div元素的直接后代元素span, 不会选择到span中嵌套的元素
+
+    * 相邻选择器
+
+      * 先为某一个p选择这是属性:  class="first"
+
+      * 写法  .first + p{}   选择与类名为first的p标签相邻的p标签(只会选择到相邻的一个,不会选到第三)
+
+  * 特殊选择器
+
+
+
+### 特殊选择器及使用场景
+
+* 浏览器基础操作
+  * 调整网速
+    * 开发者工具->网络条件->网络限制
+
+* 特殊的选择器
+
+  * 伪类选择器
+
+    * 用于选择一些元素的特殊效果
+      * 选中a标签的未选中状态:  a:link{}
+      * 选中a标签的已选择状态:  a:visited{}
+      * 选中a标签的鼠标悬浮状态:   a:hover{}
+      * 选择a标签的点击瞬间状态:   a:active{}
+      * 应该注意的是 这四个状态在css中书写顺序不可颠倒, 因为css是层叠覆盖的, 你想一下,  如果未选中状态样式覆盖了悬浮样式,那悬浮样式还能生效吗? 不能.(当然,如果样式块中的属性不相同是不影响的)
+
+    * 在某些场景中选择有关系的元素
+      * 选择父元素下的第一个子元素:  div p:first-child{}  
+      * 选择父元素下的最后一个子元素:  div p:last-child{}
+      * 选择父元素下第 3 个子元素:  div p:nth-child(3){}
+      * 选择父元素下第奇数个子元素:  div p:nth-child(odd){}
+      * 选择父元素下第n+2个子元素之后的所有子元素:  div p:nth-child(n+2){}     注意n是从0开始的,即  0+2   1+2   2+2  3+3  4+2  ......
+
+
+
+### CSS之盒子模型
+
+* 盒子模型
+  * CSS中, 所有的HTML元素都可看成一个盒子
+
+* 具体:
+
+  <img src="https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/box.png" alt="box" style="zoom:80%;" />
+
+* 盒子组成:
+  * 盒子和盒子之间的间隙(margin)
+  * 盒子的边框(border)
+  * 盒子的内部间隙(padding)
+  * 盒子的内容(content)
+
+* 代码
+
+  * 盒子的大小计算方式会是宽高+margin  这样不利于布局
+    * 可添加box-sizing属性并设其值为border-box  这样我们设置的宽高直接就是盒子的宽高了
+
+  * 常用属性介绍
+
+    * `margin`外边距   `padding`内边距
+      * 设置一个值  :   四周边距
+      * 设置两个值  :   上下边距    左右边距
+      * 设置四个值  :   上   右   下   左   边距
+
+    * `border`边框    1px    solid   #000
+      * 三个值对应:   宽度   线条类型(实线)   颜色
+
+
+
+### CSS常用属性
+
+* 常用属性
+
+  * 盒子的位置和大小
+
+    * 尺寸
+
+      ```css
+      宽度  width: 长度 | 百分百 | auto
+      		使用auto时,块级元素会默认占满一整行,行内元素会占满它的内容宽度
+      		百度比宽度是根据父元素宽度计算来的
+      高度  height
+      边界  margin  padding
+      ```
+
+      
+
+    * 布局
+
+      ```css
+      浮动  float
+      定位  position
+      盒子内容超出部分:  overflow: hidden || scroll || auto
+      			hidden会将超出部分隐藏
+      			scroll会增加滚动条,通过滚动来查看超出的部分
+      			auto会根据内容自动选择是否显示滚动条
+      ```
+
+      
+
+  * 外观、风格
+
+    ```css
+    background: 背景颜色 || 背景图像 || 背景是否重复 || 背景要不要固定(滚动条滚动时背景是否一起滚动) || 背景位置
+    background中的属性都可以一一裁开来进行设置, 比如背景颜色:background-color
+    ```
+
+    * 文字属性
+
+      ```css
+      字体大小  font-size
+      是否加粗  font-weight
+      是不是斜体  font-style
+      字体是什么  font-family
+      可以合并成一个属性  font
+      ```
+
+      
+
+### CSS特性之层叠
+
+* css全称: 层叠样式表
+* 层叠是一个基本特征
+  * 一个css属性被多次声明时, 会根据优先级或声明顺序来计算采用哪个样式
+
+* 优先级是如何计算的?
+  * id > class > tag
+  * 标签选择器  1
+  * 类选择器  10
+  * id选择器  100
+  * 权重是可以累加的, 比如id选择器和类选择器组合在一起权重就是110
+  * 通配符选择器和表示关系的选择器, 对优先级没有影响
+
+* 例外规则
+  * !important
+  * 代码: color: red !important;
+  * 注意
+    * 不利于代码维护
+    * 建议不要在自己的局部代码(公用代码)里使用important
+    * 可以在引入外部css时, 使用important覆盖他本身代码的样式
+
+
+
+### CSS之可继承的属性
+
+* 什么是继承
+  * 当前的元素你不设置某些属性时, 展示出来的样子(继承了父元素的某些属性)
+  * css中每个属性都可以选择是否声明继承
+
+* 默认设置继承的属性
+  * 颜色, 文字, 字体间距行高, 对齐方式, 列表的样式
+
+
+
+### HTML的重要元素
+
+* 表格的基本结构
+  * 由一行或者多行的单元格数据组成
+
+* 在HTML中怎么表示
+  * `table`表示表格元素
+  * `tr`表示一行行的数据
+    * `th`表示数据中的表头部分
+    * `td`表示正常的数据
+
+* `table`元素里常用的属性
+  * `border`(边框)
+    * 可直接写在table标签中: <table border>...
+  * cellspacing(单元格间距)
+  * cellpadding(单元格内部间距)
+  * colspan(用于合并列)
+  * rowspan(用于合并行)
+
+* CSS 对齐文本的方式: align="center"  居中
+
+
+
+### HTML复杂的表格
+
+* 对表格数据进行分组
+  * `thead`元素包裹着表头部分
+  * `tbody`元素包裹着表格数据部分
+  * `tfoot`元素包裹着表格尾部部分
+
+在浏览器中看到图中的字样, 代表这个css样式是默认样式
+
+<img src="https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/default.png" alt="default" style="zoom:80%;" />
+
+*  部分属性:
+  * border-spacing: 0px;  将表格线之间的距离取消,但这样相邻的线会重叠导致变粗, 解决思路是自己定义dorder属性代替原本的border, 在自定义border中只设置单元的左和上边框的样式,这样就不会重叠了,至于右和下边框则通过设置table的border-right和border-bottom解决.
+
+* 一个示例
+
+  ```html
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=cai1, initial-scale=1.0">
+      <title>采购表</title>
+      <style>
+          h1{
+              text-align: center;
+              width: 600px;
+          }
+          .table{
+              width: 600px;
+              border-spacing: 0px;
+              border-right:1px solid #ccc;
+              border-bottom:1px solid #ccc;
+          }
+          .table th{
+              background-color: #33aef0;
+              color: #fff;
+          }
+          .table th, .table td{
+              /* border: 1px solid #ccc; */
+              border-top: 1px solid #ccc;
+              border-left: 1px solid #ccc;
+          }
+      </style>
+  </head>
+  <body>
+      <h1>xxxx采购单</h1>
+      <table class="table">
+          <thead>
+              <tr>
+                  <th rowspan="2">产品</th>
+                  <th rowspan="2">日期</th>
+                  <th colspan="2">产品型号</th>
+                  <th rowspan="2">来源</th>
+              </tr>
+              <tr>
+                  <th>大 (件)</th>
+                  <th>小 (件)</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr>
+                  <td>矿泉水</td>
+                  <td align="right">2月21日</td>
+                  <td align="right">4</td>
+                  <td align="right">2</td>
+                  <td>港东福山</td>
+              </tr>
+              <tr>
+                  <td>矿泉水</td>
+                  <td align="right">2月21日</td>
+                  <td align="right">4</td>
+                  <td align="right">2</td>
+                  <td>港东福山</td>
+              </tr>
+          </tbody>
+      </table>
+  </body>
+  </html>
+  ```
+
+  
+
+
+
+### HTML中的表单元素
+
+* 使用场景
+  * 需要提交一些信息到服务端的时候(前后端联调过程中)
+
+* 核心元素
+
+  * input(核心元素)
+
+    * 输入框
+      * type属性用于指定可输入的文本类型
+      * name
+      * id
+
+  * label(提高交互体验)
+
+    * 可将复选框和文字一起包裹起来,这样点击文件也可以选中复选框
+
+    * 也可以通过他的for属性来寻找input的id
+
+      ```html
+      <!-- 写法1 -->
+      <input type="checkbox" name="isAgree" id="isAgree">
+      <label for="isAgree">同意</label>
+      <!-- 写法2 -->
+      <label>
+         	<input type="checkbox" name="isAgree" id="isAgree">
+      </label>    
+      ```
+
+  * select(下拉框)
+
+    * 子元素 option
+
+      ```html
+      <select name="" id="">
+          <option value="1">11</option>
+      	<option value="1">11</option>
+      </select>
+      ```
+
+  * textarea(文本域)
+
+    * 较大的文本输入框
+
+      ```html
+      <textarea name="" id="" cols="30" rows="10"></textarea>
+      ```
+
+  * button(按钮)
+
+  * form
+
+    * 将表单包裹起来, 通过指定其action来做处理, 可以将表单值全部提交后台
+
+      ```html
+      <form action="">
+      	<input type="text">
+          <!-- 写法1 -->
+      	<input type="checkbox" name="isAgree" id="isAgree">
+      	<label for="isAgree">同意</label>
+      	<!-- 写法2 -->
+      	<label>
+         		<input type="checkbox" name="isAgree" id="isAgree">
+      	</label>   
+          <select name="" id="">
+          	<option value="1">11</option>
+      		<option value="1">11</option>
+      	</select>
+          <textarea name="" id="" cols="30" rows="10"></textarea>
+          <button>注册</button>
+      <form>    
+      ```
+
+
+
+### CSS之布局相关
+
+* 元素的分类
+  * 块级元素
+  * 行内元素
+
+* 正常元素怎么布局
+  * 默认,一个块级元素的内容宽度就是其父元素的100%, 他的高度和其内容高度一致
+  * 行内元素它的宽度和高度都是根据内容决定的(**无法设置**行内元素的宽高)
+    * 可设置display属性, 定义元素的类型(在css3中还可以设置布局)
+
+* 元素之间是如何相互影响的呢?
+  * 正常的文档布局流
+    * 每个块级元素会在上个元素下面另起一行
+    * 行内元素不会另起一行
+
+
+
+### CSS之浮动
+
+* 浮动
+  * 浮动是一种布局方式, 最初是为了文字能够围绕在图片周围而引入
+
+* 为什么引入
+  * 常规的布局过于死板, 引入`float`属性来实现更丰富的布局
+
+* 万物皆可浮动
+
+  * 浮动的元素会并行显示
+
+    * 浮动的元素脱离了正常的文档布局流
+
+    * 文本会围绕在它身边
+
+      ```html
+      <!DOCTYPE html>
+      <html lang="en">
+      
+      <head>
+          <meta charset="UTF-8">
+          <meta http-equiv="X-UA-Compatible" content="IE=edge">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Document</title>
+          <style>
+              .img{
+                  float: left;
+              }
+              p{
+                  width: 300px;
+              }
+          </style>
+      </head>
+      
+      <body>
+          <h1>浮动实例</h1>
+          <p class="second">
+              <img class="img" src="" alt="">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, ratione sunt eaque nostrum corporis quae
+              voluptate nulla mollitia odit magnam, in sed soluta eum, beatae quia. Dolores, cumque impedit, corrupti modi
+              necessitatibus nobis id perferendis quia pariatur quas sunt blanditiis quis, facilis distinctio magni eos
+              excepturi! Impedit tempora ratione voluptas.</p>
+      </body>
+      
+      </html>
+      ```
+
+* 浮动带来的问题
+
+  * 影响其他元素的布局
+
+    ```html
+    	<div>
+            <p class="11">1111</p>
+            <p class="22">2222</p>
+        </div>
+        <p class="33"></p>  
+    <!-- 如果为.11和.22设置了浮动, 那么div就无法计算到他俩的大小,导致div的宽度其实是0, 这个时候, .33就会显示是.22的右边了(如果.11和.22的宽度不足以填满一行且剩余空间能够放下.33)  但从布局上, 我们希望.33是在.11和.22下面的, 这就是浮动带来的问题. -->
+    ```
+
+* 如何解决?
+
+  * 清除浮动
+
+    * 利用clear属性
+
+      * 在最后一个浮动元素后面加入一个带有clear:both属性的空元素
+
+      * 通过伪类选择器, 利用:after伪元素在元素末尾添加一个内容并带有clear:both属性来实现----更常用的方法
+
+        ```html
+        <style>
+                .img{
+                    float: left;
+                }
+                p{
+                    width: 300px;
+                }
+            /* 使用这种声明之后, div就可以计算出p标签的宽高, 而且.33也到了div的下面 */
+                .clearfix::after{
+                    /* content必须声明, 它的作用就是在这个元素的末尾加上content的值 */
+                    content: '';
+                    /* 声明它为块级元素, display同样必须声明 */
+                    display: block;
+                    clear: both;
+                }
+            </style>
+        </head>
+        
+        <body>
+            <div class="clearfix">
+                <h1>浮动实例</h1>
+                <p class="second">
+                    <img class="img" src="" alt="">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, ratione sunt eaque nostrum corporis quae
+                    voluptate nulla mollitia odit magnam, in sed soluta eum, beatae quia. Dolores, cumque impedit, corrupti modi
+                    necessitatibus nobis id perferendis quia pariatur quas sunt blanditiis quis, facilis distinctio magni eos
+                    excepturi! Impedit tempora ratione voluptas.</p>
+            </div>
+            <p class=".33">3333333</p>
+        </body>
+        ```
+
+    * 生成BFC(块级上下文)
+
+  * 将浮动元素的父级高度固定
+
+
+
+### CSS之定位
+
+* 也是为布局引入的属性
+
+* `position`常用的值
+
+  * 子绝父项   当子元素想相对父元素做偏移时就将父元素设为相对定位, 子元素设为绝对定位
+
+    * static(静态定位,  就是正常的文档流定位)
+
+    * relative(相对定位)      可以认为是相对浏览器作偏移
+
+    * absolute(绝对定位)    相对是相对定位的上级元素做偏移
+
+      ```html
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+          <meta charset="UTF-8">
+          <meta http-equiv="X-UA-Compatible" content="IE=edge">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Document</title>
+          <style>
+              .box{ /* 父 */
+                  position: relative; /* 相对定位 */
+                  width: 200;
+                  height: 200px;
+                  left: 200px;
+                  background-color: red;
+              }
+              .box2{  /* 子 */
+                  position: absolute;  /* 绝对定位 */
+                  width: 50px;
+                  height: 50px;
+                  background-color: blue;
+                  right: 0;
+              }
+          </style>
+      </head>
+      <body>
+          <h1>定位</h1>
+          <div class="box">
+              <div class="box2"></div>
+          </div>
+      </body>
+      </html>
+      ```
+
+    * fixed(固定定位)
+
+* 相关的属性
+  * z-index
+    * 使用场景: 当定位(除static定位外)的合作重叠在一起时, z-index值大的显示在上面
+      * z-index默认值为1
+
+
+
+### CSS之经典的三栏布局
+
+**三栏布局: 高度固定, 左右俩侧的盒子宽度为200px, 中间自适应**
+
+* 一    采用浮动实现
+* 二    采用定位实现
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>三栏布局</title>
+    <style>
+        .wrapper{
+            margin-bottom: 20px;
+        }
+        /* 浮动实现方式 */
+            /* ***********公共属性BEGIN***** */
+        .left, .middle, .right{
+            height: 400px;
+        }
+        .left, .right{
+            width: 200px;
+            background-color: red;
+            float: left;
+        }
+            /* ********公共属性END********* */
+        .float .right{
+            float: right;
+        }
+        .float .middle{
+            /* 如果html标签顺序是left  middle   right  那么仅仅是left和right做了浮动,
+            但程序是从上往下执行,left浮动了,所以middle到了left右边, 但middle是块级元素,
+            会默认占满整行,所以right杯挤到到了下面 */
+            /* 所以, 我们将html标签顺序改为  left  right  middle */
+            background-color: blue;
+            margin: 0 200px;
+        }
+
+        /* 下面是定位的实现方式 */
+        .absolute{
+            position: relative;/* 父相 */
+            height: 400px;/* 定位也是脱离文档流的,所以要指定高度 */
+        }
+        .absolute .left{
+            position: absolute;/* 子绝 */
+            left:0;
+            background-color: red;
+        }
+        .absolute .middle{
+            position: absolute;/* 子绝 */
+            left: 200px;
+            right: 200px;
+            background-color: blue
+        }
+        .absolute .right{
+            position: absolute;/* 子绝 */
+            right: 0;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>三栏布局</h1>
+    <!-- wrapper   用来做容器 -->
+    <div class="wrapper float">
+        <h2>浮动实现</h2>
+        <div class="left"></div>
+        <div class="right"></div>
+        <div class="middle"></div>
+        <!-- 因为middle是有高度的,div会计算middle的高度,所以不必清楚浮动, 下面的内容也可以正常显示 -->
+    </div>
+    <div class="wrapper absolute">
+        <h2>定位实现</h2>
+        <div class="left"></div>
+        <div class="right"></div>
+        <div class="middle"></div>
+    </div>
+</body>
+</html>
+```
+
+
+
+### CSS常见操作之水平垂直居中
+
+* 如何使用CSS实现水平垂直居中
+
+  * 行内元素
+    * 水平上使用text-align
+    * 垂直上将其行高(line-height)设为与父元素高度一致
+  * 块级元素
+    * 通过定位实现
+      * 已知宽高:  (maigin+自身元素具体宽高 / 2) + top或者left50%
+      * 不知宽高时使用**transform**的translate
+
+  ```html
+  <!DOCTYPE html>
+  <html lang="en">
+  
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>水平垂直居中</title>
+      <style>
+          .box{
+              width: 200px;
+              height: 200px;
+              background-color: red;
+              margin-bottom: 20px;
+          }
+          .box1{
+              text-align: center;/* 文本对齐方式, 行内元素也可看作文本 */
+              line-height: 200px;/* 与父元素高度一致 */
+          }
+          .box1 span{
+              background-color: blue;
+          }
+          /* 块级元素--实现水平垂直居中 */
+          .inner-box{
+              width: 50px;
+              height: 50px;
+              background-color: blue;
+              position: absolute;/* 子绝 */
+              top: 50%;/* 相对父元素偏移 */
+              margin-top: -25px;/* 偏移应减去自身的高度的一半 */
+              left: 50%;/* 相对父元素偏移 */
+              margin-left: -25px;/* 偏移应减去自身的宽度的一半 */
+          }
+          .box2{
+              position: relative;/* 父相 */
+              /* 高度也必须设置,但是.box已经为它设置好了 */
+          }
+          /* 块级元素宽高未知时: */
+          .inner-box2{
+              background-color: blue;
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              /* 相对自身进行偏移,水平偏移左50%,垂直上偏移50% */
+              transform: translate(-50%,-50%);
+          }
+          .box3{
+              position: relative;
+          }
+      </style>
+  </head>
+  
+  <body>
+      <h1>水平垂直居中</h1>
+      <div class="box box1">
+          <span>行内元素</span>
+      </div>
+      <div class="box box2">
+          <div class="inner-box">块级元素</div>
+      </div>
+      <div class="box box3">
+          <div class="inner-box2">块级元素</div>
+      </div>
+  </body>
+  
+  </html>
+  ```
+
+  
+
+### CSS高级知识之BFC
+
+* MDN解释:
+  * **块格式化上下文（Block Formatting Context，BFC）** 是Web页面的可视CSS渲染的一部分，是块盒子的布局过程发生的区域，也是浮动元素与其他元素交互的区域。
+
+* 通俗解释
+  * 形成一块封闭的区域, 能检测到区域内脱离文档流的元素
+
+* 作用
+  * 清除浮动带来的影响
+    * 多数情况是为父级元素设置属性  overflow: hidden;
+  * 解决边距塌陷问题(边距塌陷又名外边距折叠, 它只会发生在属于同一BFC的块级元素之间)
+
+* 回顾: 浮动的特征
+  * 文字内容会围绕在浮动元素身边
+  * 父级检测不到浮动元素的宽高
+
+<img src="https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/float.png" alt="float" style="zoom: 67%;" />
+
+* 什么是边距塌陷?
+
+  ```html
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+      <style>
+          /* 演示边距塌陷--盒子同时设置上下边距时,会取一个绝对值大的来生效 */
+          p{
+              background-color: blue;
+          }
+          .first{
+              margin-bottom: 20px;
+          }
+          .second{
+              margin-top: 20px;
+          }
+          /* 这两个p标签直接的间隔不会是20+20px  而是20px */
+      </style>
+  </head>
+  <body>
+      <!-- 边距塌陷问题 -->
+      <div class="margin-box">
+          <p class="first">123</p>
+          <p class="second">456</p>
+      </div>
+  </body>
+  </html>
+  ```
+
+  <img src="https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/%E8%BE%B9%E8%B7%9D%E5%A1%8C%E9%99%B7.png" alt="边距塌陷" style="zoom:67%;" />
+
+* 边距塌陷解决代码
+
+  ```html
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+      <style>
+          p{
+              background-color: blue;
+          }
+          .margin-box2{
+              overflow: hidden;
+          }
+      </style>
+  </head>
+  <body>
+      <!-- 边距塌陷问题解决 -->
+      <div>
+          <!-- 边距塌陷只会出现在属于同一个BFC中的块级元素之间 -->
+          <!-- 将.margin-box2  设为BFC   那么.b_first和b_second就不再同一块BFC中,这样就解决了边距塌陷 -->
+          <div class="margin-box2">
+              <p class="b_first">123</p>
+          </div>
+          <p class="b_second">456</p>
+      </div>
+  </body>
+  </html>
+  ```
+
+  
+
+### 开发实战
+
+* 真实项目开发
+
+  * 结构化开发
+    * img
+    * css
+    * html
+    * index.html
+  * 借助UI框架开发
+    * BootStrap
+      * 引入
+      * 找到需要的组件, 复制其HTML代码粘贴即可
+      * 根据自身需求, 进行一定程度的改写定制
+
+  * 初始化css文件
+    * reset.css
+      * 百度搜索, 复制粘贴至自己的reset.css文件
+      * 根据自身需求, 进行一定程度的改写定制
+      * 在自己的文件中通过link标签引入
+
+  * 矢量图标库  iconfont    [iconfont-阿里巴巴矢量图标库](https://www.iconfont.cn/)
+
+    * 注册账号
+
+    * 搜索需要的图标->添加至购物车
+
+    * 点击右上角购物车->点击添加到项目
+
+    * 上方导航栏->资源管理->我的项目->Font class->生成在线链接->复制代码
+
+    * 在自己的文件中通过link标签引入,herf值为  http: + 复制的代码
+
+      ```html
+      <link rel="stylesheet" href="http://at.alicdn.com/t/font_2718812_buqcefuy34f.css">
+      ```
+
+    * 在html中一般通过 i 标签来使用icon
+
+      ```html
+      <i class="iconfont icon-ok01" style="font-size: 32px;"></i>
+      <!-- iconfont是使用此图标所必须写的  icon-ok01是你的图标库中对应图标的名字(代码)  你已经看到了,使用此图标就和使用文字一样,可以随意设置大小(font-size),颜色(color)... -->
+      ```
+
+    * 通常自动生成的格式就够用了,如果你需要生成像svg这样格式的话,需要到项目设置中勾选对应项
+
+      
+
+* 勿忘初心
+
+  * 不要丧失书写元素css和html的能力
+
+* 开发中的一些技巧
+  * 尽量将内容分得细一点, 方便以后做扩展, 例如用一个div包裹img   而不是将img单独放出来
+  * 将a标签的href值设置为  javascript:void(0)   这样点击a标签就不会发生任何事
+  * CSS文件中利用注释说明你的模块的开始与结尾, 如 header部分的开始与结尾
+  * 网页可以**以浅白色**打底   \#f4f4f4
+
+* 开发过程
+  * 先分析一个布局, 分块细一点
+  * 写对应的注释
+  * 考虑周全一点
+
+* 遇到问题
+
+  * 发现布局乱了
+    * 检查其他盒子的高度是否造成影响,比如某个盒子高度超出了范围影响到了下面的布局,这时一般是设置overflow: hidden;/* 超出部分隐藏 */
+
+  * 块级元素里包了张图片时会有一个间距
+    * 解决办法:  font-size:0
+
+  * 换着思路实现问题, 比如可以用伪类来实现布局
+
+* 知识分布
+
+  * html + css (最基本)
+  * js(网页交互)
+    * Vue.js
+    * React.js
+
+  * 项目构建
+    * git(代码管理工具)
+    * webpack(打包工具, 打包资源代码)
+
+  * 后端
+    * node.js(服务,操作数据库)
+
+  * 部署代码
+    * nginx
+
+* 警示
+  * 练习>>>>理论学习
+  * 解决问题
+  * MDN文档最规范, 博文只能参考
+
