@@ -1,0 +1,279 @@
+域名解析默认只可解析到IPv4地址:
+
+![img](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/clip_image003.jpg)
+
+Test是域名前缀,即二级域名,是可自定义的部分.这个解析指向为 http://test.wzc520pyf.cn:80
+
+后面的119.45.102.83则是IPv4地址, 默认与80端口绑定(https访问默认443)
+
+**(https在nginx中的配置见: [如何将自己的接口服务升级为https - lalala的博客 (wzc520pyf.cn)](https://www.wzc520pyf.cn/2021/12/05/如何将自己的接口服务升级为https.html) )**
+
+如果想访问服务器上的其他端口, 需要在服务器上使用nginx反向代理将80端口映射到其他端口(你想访问的端口)
+
+当然也有其他办法, 在上面设置   A  的那里, 选择隐性URL 也可以办的,但域名必须完成备案 并且要购买增值服务, 300元/年/条隐性解析记录
+
+[(9条消息) 腾讯云域名解析到非80端口_Onedog_的博客-CSDN博客](https://blog.csdn.net/Onedog_/article/details/117263298)
+
+增值服务在腾讯云域名控制台购买套餐即可.
+
+ 
+
+腾讯云域名可免费申请个人版SSL证书, 需自行手动部署到自己的服务器上, 教程:
+
+[SSL 证书 如何选择 SSL 证书安装部署类型？ - 证书安装 - 文档中心 - 腾讯云 (tencent.com)](https://cloud.tencent.com/document/product/400/4143)
+
+
+
+***注意Nginx里路径采用的是  /  ,而win系统采用的确实  \  ,注意替换*** 
+
+ 
+
+Nginx命令:
+
+nginx -s reload  重新读取config文件
+
+nginx -s stop   快速停止nginx
+
+nginx -s reopen 重启nginx
+
+start nginx  启动nginx
+
+nginx -s quit   退出nginx 
+
+
+
+ 
+
+### 附录: nginx的坑:
+
+**解决nginx退出后却依然能访问页面的问题**
+
+正常操作：
+
+（即不会出现nginx退出后依然能访问页面的问题）
+
+1. 在命令行中找到安装nginx文件夹，输入命令start nginx
+
+![img](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/clip_image004.png)
+
+2. 在浏览器地址栏输入localhost，可以看到欢迎页面表示nginx正常运行
+
+![img](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/clip_image005.png)
+
+并且可以在nginx文件夹下的logs文件夹里看到nginx.pid文件，也能表示目前nginx在运行
+
+![img](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/clip_image006.png)
+
+3. 如果我们对nginx.conf进行修改，为了看到修改后的页面，需要有两步操作：
+
+① 删除浏览器的本地缓存。以microsoft edge为例：
+
+点击浏览器右上角的三个点，在下拉列表中选择“设置”
+
+![img](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/clip_image007.png)
+
+在设置页面的左侧栏选择“隐私、搜索和服务” → “选择清楚的内容” → 按照默认勾选项清除数据即可
+
+![img](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/clip_image008.png)
+
+原因：（为什么我们要删除本地缓存？）
+
+因为当我们修改nginx.conf后打开本地网址(localhost)发现依旧是以前的界面，即便我们使用了nginx -s reload命令，也没有看到任何修改。
+
+此时我们可以打开logs文件夹下的access.log文件，可以看到日志中返回的代码是304 → 认为请求的页面未发生变化，用户请求该网址时，浏览器调用本地缓存显示该页面。
+
+这就解释了为什么我们修改并更新了配置，却依旧显示旧界面的原因。
+
+![img](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/clip_image009.png)
+
+② **更新配置**
+
+输入命令： `nginx -s reload`
+
+问题：退出nginx却依然能访问页面
+
+之前用start nginx命令启动服务的时候，总给我一种闪退的感觉，后来我使用nginx作为启动命令，就发生了很多问题……
+
+在命令行找到nginx的文件夹，输入命令nginx，启动服务，此时显示的界面是停留在nginx这个命令的位置，不能输入新命令。
+
+于是我重开了一个命令行，在修改nginx.conf之后使用reload命令更新配置，结果发现无法更新，最终决定退出nginx再重启服务试试：
+
+> nginx -s quit  // 退出nginx
+
+我记得此时logs文件夹里的nginx.pid文件应该是没有了，而且这个时候再使用nginx -s reload等命令会报错——找不到nginx.pid文件，于是我以为服务已经停止了。我又一次使用nginx命令开启服务，但是发现nginx.conf没有更新。这个时候我又关闭了nginx服务，然后在浏览器输入localhost会惊奇地发现竟然还能访问！？
+
+我在logs的error.log发现了一些奇怪的信息：
+
+![img](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/clip_image010.png)
+
+推测可能是有多个nginx进程依旧在执行，于是在命令行输入：
+
+> tasklist /fi "IMAGENAME eq nginx.exe"
+
+找到nginx.exe进程，查看到它的pid号后强制删除（因为这个进程普通方法删除不了）：
+
+> taskkill /f /pid 21992
+
+ 注意，一般会有多个nginx.exe进程在执行，所以要删除多个。当你以为你删除了所有的nginx.exe进程却发现依然能访问页面的时候，再按照上面所示在tasklist中查找一下nginx.exe进程，有时你会惊喜地发现怎么还有？！——直到nginx.exe删除干净后就会发现无法访问页面了，一切也就正常了。
+
+总结：**切记使用start nginx启动服务，而不要使用nginx启动服务！！！**
+
+原文:
+
+[(11条消息) 解决nginx退出后却依然能访问页面的问题_Desny的博客-CSDN博客_nginx 退出](https://blog.csdn.net/weixin_40908748/article/details/110140072?utm_medium=distribute.pc_relevant_t0.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-1.readhide&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-1.readhide)
+
+配置服务出现问题排查及排查思路:
+
+1. 前端项目请求地址和端口是否为服务器上所运行后端服务地址(前端访问是否正确)
+
+2. 后端服务地址所使用的的端口能否被访问到,postman一测试就知道了(后端服务是否正常)
+
+3. nginx所部署前端项目所使用的的端口是否畅通,(能否被访问,如果你访问不到你的静态资源有可能是这个原因,但也不一定) (前端部署是否正确)
+
+4. 重启nginx (启动start nginx 停止nginx -s stop 查看logs文件夹看是否有nginx运行) (刷新服务)
+
+5. 清理你的浏览器缓存  (清理缓存)
+
+6. nginx是否有老线程仍在运行,进而影响新线程访问资源(关闭即可) (是否被老nginx线程干扰)  执行: **tasklist /fi "IMAGENAME eq nginx.exe"**查看是否有老线程, **接着使用** **taskkill /f /pid 21992** 一一清理掉即可
+
+7. 如果你还配置了nginx代理,那么代理的端口是否能正常访问也应该检查, 如果还使用了https,那么证书路径和证书名,以及https在配置文件里的写法是否正确也应该检查.(代理设置是否正确, https是否正确部署---这个可以看一下域名监控控制台,显示正常即代表正确)
+
+(如果你同时配置了两个https服务, 那么第二个不会生效, 解决方案在下文)
+
+8. 服务器控制台是否有放通你访问的端口 (云服务器是否放通你的端口)
+
+9. 如果你设置了nginx代理, 你只需要保证服务器控制台放通你的配置端口即可, 转发端口服务器控制台不必放通, 因为配置端口才是用户所访问的, 至于服务器再转移到哪里那是服务器自己的事.   这样一来, 你的服务器只需要放通一个端口
+
+### 配置多个https服务,但是只生效第一个
+
+[nginx 同一个IP上配置多个HTTPS主机 – 运维生存时间 (ttlsa.com)](http://www.ttlsa.com/web/multiple-https-host-nginx-with-a-ip-configuration/)
+
+这是由SSL协议本身的行为引起的——先建立SSL连接，再发送HTTP请求，所以nginx建立SSL连接时不知道所请求主机的名字，因此，它只会返回默认主机的证书。
+
+如果你非要同时部署多个https那么, 请查看博文
+
+如果你可以接受只部署一个https,通过路径来划分项目的解决方案的话,请往下看:
+
+[(11条消息) 使用nginx部署多个vue项目,亲测有效(使用域名https方式访问)_hap0728的博客-CSDN博客](https://blog.csdn.net/qq_42643690/article/details/113524526)
+
+(通过nginx代理来访问后端,可以避免跨域问题, 即将请求通过代理转发到正确的ip, 下面是一个例子)
+
+```nginx
+
+#user  nobody;
+worker_processes  1;
+
+#error_log  logs/error.log;
+#error_log  logs/error.log  notice;
+#error_log  logs/error.log  info;
+
+#pid        logs/nginx.pid;
+
+
+events {
+    worker_connections  1024;
+}
+
+
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+
+    #log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+    #                  '$status $body_bytes_sent "$http_referer" '
+    #                  '"$http_user_agent" "$http_x_forwarded_for"';
+
+    #access_log  logs/access.log  main;
+
+    sendfile        on;
+    #tcp_nopush     on;
+
+    #keepalive_timeout  0;
+    keepalive_timeout  65;
+
+    gzip on;
+
+    gzip_static on;
+
+    gzip_buffers 4 16k;
+gzip_comp_level 5;
+    
+gzip_types text/plain application/javascript application/x-javascript text/css application/xml text/javascript application/x-httpd-php image/jpeg image/gif image/png;
+
+	charset utf-8;
+         server {
+                #SSL 访问端口号为 443
+                listen 443 ssl;
+                #填写绑定证书的域名
+                server_name wzctest.wzc520pyf.cn;
+                #证书文件名称
+                ssl_certificate 1_wzctest.wzc520pyf.cn_bundle.crt;
+                #私钥文件名称
+                ssl_certificate_key 2_wzctest.wzc520pyf.cn.key;
+                ssl_session_timeout 5m;
+                #请按照以下协议配置
+                ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+                #请按照以下套件配置，配置加密套件，写法遵循 openssl 标准。
+                ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE;
+                ssl_prefer_server_ciphers on;
+                location / {
+                        #网站静态资源路径。此路径仅供参考，具体请您按照实际目录操作。
+                        proxy_pass http://119.45.102.83:3333;
+                        proxy_connect_timeout 600;
+                        proxy_read_timeout 600;
+                }
+        }
+    server {
+        listen       3333;
+        server_name  localhost;
+	# compression-webpack-plugin 配置
+    
+	gzip on;
+    
+	gzip_min_length 1k;
+    
+	gzip_comp_level 9;
+    
+	gzip_types text/plain application/javascript application/x-javascript text/css application/xml text/javascript application/x-httpd-php image/jpeg image/gif image/png;
+    
+	gzip_vary on;
+    
+	# 配置禁用 gzip 条件，支持正则，此处表示 ie6 及以下不启用 gzip（因为ie低版本不支持）
+    
+	gzip_disable "MSIE [1-6]\.";
+
+        #charset koi8-r;
+
+        #access_log  logs/host.access.log  main;
+
+        location / {
+            root  C:\Users\Administrator\Desktop\vue-project\watch\dist;
+	    try_files $uri $uri/ @router;
+            index  index.html index.htm;
+        }
+	location /api {
+                        #将请求代理至后端服务器ip
+                        proxy_pass http://101.37.39.228:9162;
+                        proxy_connect_timeout 600;
+                        proxy_read_timeout 600;
+        }
+
+	location @router {
+	    rewrite ^.*$ /index.html last;
+	}
+
+        #error_page  404              /404.html;
+
+        # redirect server error pages to the static page /50x.html
+        #
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   html;
+        }
+    }
+
+}
+```
+
+
+
