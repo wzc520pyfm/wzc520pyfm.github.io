@@ -1,0 +1,253 @@
+### Nginx 简单指令
+
+Nginx启动:   **安装目录**下执行  nginx
+
+启动		`start nginx`
+
+停止       `nginx -s stop`
+
+重启       `nginx -s reopen`
+
+重新读取config文件      `nginx -s reload`
+
+退出nginx    `nginx -s quit`
+
+例如我的nginx安装目录是: C:\Users\Administrator\Desktop\nginx-1.20.0\nginx-1.20.0
+
+/****************************************************/
+
+### 配置https
+
+首先在腾讯云DNSPOD中为域名添加解析:(下面这条解析的访问是这样的: wzctest.wzc520pyf.cn)
+
+![img](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/clip_image002.jpg)
+
+点击SSL按钮免费申请证书
+
+证书申请到后下载证书,并上传到服务器并解压, 如果是Nginx服务则将解压所得目录下的Nginx目录中的文件拷贝到系统Nginx的config目录下, 并重新设置Nginx的config文件(配置时注意https默认端口是443, 当然我们的服务不一定是443, 所以要用nginx映射到其他端口).
+
+服务器的443端口必须放通(一般默认是通的), 如何检查和放通它? 登录腾讯云服务器控制台设置安全组:
+
+![img](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/clip_image004.jpg)
+
+(在服务器上检查某一端口是否通畅: cmd命令行执行: telnet 8.8.8.8 1234  如果提示连接失败则是不通, 出现什么也没有的黑框代表通畅  8.8.8.8 是你服务器的ipv4地址  1234是要检查的端口号)
+
+Nginx的config文件配置参考模板:
+
+```nginx
+server {
+
+​        #SSL 访问端口号为 443
+
+​        listen 443;
+
+​        ssl on;
+
+​        #填写绑定证书的域名
+
+​        server_name www.xxx.cn;
+
+​        #证书文件名称
+
+​        ssl_certificate 1_www.xxx.cn_bundle.crt;
+
+​        #私钥文件名称
+
+​        ssl_certificate_key 2_www.xxx.cn.key;
+
+​        ssl_session_timeout 5m;
+
+​        #请按照以下协议配置
+
+​        ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+
+​        #请按照以下套件配置，配置加密套件，写法遵循 openssl 标准。
+
+​        ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE;
+
+​        ssl_prefer_server_ciphers on;
+
+​        location / {
+
+​            #网站主页路径。此路径仅供参考，具体请您按照实际目录操作。
+
+​            proxy_pass http://172.18.19.189:8082;
+
+​            proxy_set_header X-Forwarded-Host $host;
+
+​            proxy_set_header X-Forwarded-Server $host;
+
+​            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+​            proxy_connect_timeout 600;
+
+​            proxy_read_timeout 600;
+
+​        }
+
+​    }
+```
+
+你大概还需要在你项目的根目录下建一个web.config文件, 并在里面写好:
+
+```html
+<rule name="HTTP to HTTPS redirect" stopProcessing="true">
+
+<match url="(.*)" />
+
+<conditions>
+
+<add input="{HTTPS}" pattern="off" ignoreCase="true" />
+
+</conditions>
+
+<action type="Redirect" redirectType="Found" url="https://{HTTP_HOST}/{R:1}" />
+
+</rule>
+```
+
+重启nginx即可
+
+ 
+
+如果配置正确,在腾讯云控制台可以看到(这里说明一下, 腾讯云控制台监控的是网站ssl解析是否正确,即是否生效,是否可访问,或者说是监控你是否配置正确):
+
+![img](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/clip_image006.jpg)
+
+访问项目网站: https://wzctest.wzc520pyf.cn/findGame
+
+`// 其中findGame是项目中自定义的路径`
+
+那如果我有多个项目怎么办?  在nginx里再写一个server就好了, 端口还是443 ,只是映射到的端口不一样而已. (你可能会疑惑,那nginx在映射时怎么区分这两个项目, 很简单, 域名不一样了啊, 我们不可能为两个不同的项目使用同一个域名吧? ),当然,你也需要在项目里添加一个web.config文件
+
+
+
+如果已创建好解析,申请好ssl证书,并将ssl证书部署至服务器, 打开网站仍显示不安全: 
+
+证书监控检测的是您具体站点访问结果，这边访问测试提示证书不匹配，建议您排查您的证书安装是否成功绑定wzcblog.wzc520pyf.cn域名的对应SSL证书并重启服务，
+
+极有可能是证书没有正确绑定到对应的域名, 这有可能是你在服务器上配置出错导致(或是没有为项目添加web.config文件).
+
+本文参考博客:
+
+[(10条消息) 域名请求配置https(使用腾讯免费SSL证书)_一只小码渣的博客-CSDN博客](https://blog.csdn.net/qq_40682764/article/details/108593052?utm_medium=distribute.pc_relevant_t0.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-1.readhide&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-1.readhide)
+
+### 如何配置http:
+
+配置正常http也就是配置静态资源, 使用express自带的www服务也没问题, 只需简单的代码即可完成(请参考vue.js+node.js实战 p69)
+
+不过通常我们还是使用nginx发布静态资源比较多,express可以用来启动后台服务,但也常搭配pm2一起使用, 发布vue这样的静态资源还是用nginx吧,
+
+在nginx配置文件里新写一个server即可, 参考:
+
+```nginx
+  #静态文件
+
+  server {
+
+​    listen    8080;
+
+​    server_name localhost;
+
+​    location / {
+
+​      root  D:/resources/statichtmls;
+
+​    }
+
+  }
+```
+
+  ```nginx
+  #html文件
+  
+    server {
+  
+  ​    listen    8080;
+  
+  ​    server_name 127.0.0.1 localhost;
+  
+  ​    location / {
+  
+  ​      root  D:/resources/statichtmls;
+  
+  ​      index index.html index.htm; 
+  
+  ​    }
+  
+    }
+  ```
+
+更详细请参考:
+
+[(10条消息) nginx实现发布静态资源_lolly1023的博客-CSDN博客](https://blog.csdn.net/lolly1023/article/details/112585751)
+
+如果是要启动多个服务呢?,同样多写几个server即可:
+
+首先确认服务器释放80端口
+
+以管理员身份cmd 运行nginx
+
+生效后在conf文件夹中找到 nginx.conf文件编辑
+
+ ```nginx
+ server {
+ 
+ listen 80;
+ 
+ server_name www.csdn.com; 域名来源
+ 
+ proxy_set_header X-Real-IP $remote_addr;
+ 
+ proxy_set_header REMOTE-HOST $remote_addr;
+ 
+ proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+ 
+ access_log off;
+ 
+ location / {
+ 
+ proxy_pass localhost:8088; #转到哪里,也就是代理
+ 
+ }
+ 
+ }
+ 
+  
+ 
+ server {
+ 
+ listen 80;
+ 
+ server_name www.csdn1.com;
+ 
+ proxy_set_header X-Real-IP $remote_addr;
+ 
+ proxy_set_header REMOTE-HOST $remote_addr;
+ 
+ proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+ 
+ access_log off;
+ 
+ location / {
+ 
+ proxy_pass http://www.baidu.com; 转到百度
+ 
+ }
+ 
+ } 
+ ```
+
+更具体参考:
+
+[(10条消息) Nginx反向代理80端口，实现同一台服务器多个80端口_China-Salter的博客-CSDN博客](https://blog.csdn.net/qq_30063439/article/details/50897394?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_title~default-1.readhide&spm=1001.2101.3001.4242)
+
+如果有一个项目使用的站点是 www.helloword.com,  但是这个项目却有三个服务, 分别是web服务, 金融服务, 手机服务, 该怎么处理?
+
+解决方法仍是nginx反向代理, 通过上下文来区分三者,作不同的代理,参考:
+
+[(10条消息) 当“服务器上部署多个Web应用”，使用Nginx反向代理配置_.... 永远年轻，永远热泪盈眶-CSDN博客_nginx 一个端口多个web应用](https://wangcw.blog.csdn.net/article/details/80567233?utm_medium=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~default-7.readhide&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~default-7.readhide)
+
+ 
+
+ 
