@@ -1,0 +1,49 @@
+## 如果需要为服务添加访问路径,可以按照如下配置:
+
+```js
+//public目录为静态资源目录
+app.use(express.static(path.join(__dirname, 'public')));
+//定义的image目录为静态图片资源目录
+app.use(express.static(path.join(__dirname, 'image')));
+//赋予别名
+app.use('/chinatalk/static', express.static(path.join(__dirname, 'public')));
+
+//引用路由
+app.use('/chinatalk', indexRouter);
+
+```
+
+
+
+
+
+以下是一个express服务的完整app.js代码:
+
+```js
+var express = require('express');
+var path = require('path');
+var cookieParser = require('cookie-parser');
+var logger = require('morgan');
+
+var indexRouter = require('./routes/index');
+
+var app = express();
+
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+//public目录为静态资源目录
+app.use(express.static(path.join(__dirname, 'public')));
+//定义的image目录为静态图片资源目录
+app.use(express.static(path.join(__dirname, 'image')));
+//赋予别名
+app.use('/chinatalk/static', express.static(path.join(__dirname, 'public')));
+
+//引用路由
+app.use('/chinatalk', indexRouter);
+
+module.exports = app;
+
+```
+
