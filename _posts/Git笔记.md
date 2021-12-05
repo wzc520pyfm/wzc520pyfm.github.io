@@ -1,0 +1,825 @@
+### Git 快速入门篇
+
+自报名号,设置用户名
+
+ ![image-20211205140912843](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205140912843.png)
+
+查看用户名
+
+ ![image-20211205140926204](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205140926204.png)
+
+自报名号,设置用户邮箱
+
+ ![image-20211205140938778](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205140938778.png)
+
+查看用户邮箱
+
+ ![image-20211205140948757](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205140948757.png)
+
+切换路径:
+
+​    cd +文件夹名
+
+​    ![image-20211205140957456](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205140957456.png)
+
+返回上一级路径:
+
+ ![image-20211205141004690](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205141004690.png)
+
+在当前目录新建文件夹:
+
+ ![image-20211205141015461](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205141015461.png)
+
+进入此文件夹:
+
+ ![image-20211205141022521](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205141022521.png)
+
+在此工作目录初始化一个代码仓库
+
+ ![image-20211205141029954](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205141029954.png)
+
+文件夹显示如下:
+
+ ![image-20211205141038148](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205141038148.png)
+
+有了代码仓库之后，我们就可以在工作目录进行工作了。
+ 在目录中创建一个index.txt文件，并编写hello git内容。
+
+`cat >> index.txt`
+
+输入cat指令创建文件回车后，会等待你输入文件内容，输完ctrl+d保存退出。
+ 我们输入
+
+`hello git`
+
+查看工作状态:
+
+ ![image-20211205141101362](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205141101362.png)
+
+显示如下:
+
+ ![image-20211205141107865](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205141107865.png)
+
+红色框线内的意思是说提交时除了未跟踪的文件之外没有添加任何内容(使用“git add”进行跟踪)。
+ 说明我们的index.txt文件并没有被git跟踪，我们使用git add对文件进行跟踪。
+
+ ![image-20211205141117353](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205141117353.png)
+
+上面的指令虽然可以对index.txt进行跟踪,但如果文件很多呢?一一手敲是不可能的
+
+我们使用如下指令将当前目录的所有文件进行跟踪
+
+ ![image-20211205141124612](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205141124612.png)
+
+将该文件提交到代码仓库:
+
+ ![image-20211205141135410](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205141135410.png)
+
+-m是注释的意思，引号内写明你对此次提交的注释信息。
+
+**当我们add文件之后，文件是会先放在暂存区，此时文件并没有被提交，所以你可以随时撤回你放入暂存区的文件，当你commit之后，文件才会从暂存区被提交到代码仓库。**
+
+对文件进行修改
+
+ ![image-20211205141151604](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205141151604.png)
+
+输入i、o或者a都可以进入vim的编辑模式，进入编辑模式后，对文件内容进行一些简单的修改，然后按esc退出编辑模式，进入命令模式，此时，输入 :q! 即可退出编辑器，但是修改不保存，输入 :wq 即可保存内容并退出，
+
+查看工作状态
+
+ ![image-20211205141203356](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205141203356.png)
+
+Git提示我们工作区内容被修改了
+
+Ok,我们再对该目录下的所有文件进行跟踪,并提交更改至代码仓库:
+
+ ![image-20211205141207848](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205141207848.png)
+
+这样我们的修改就好被同步到我们的代码仓库中
+
+接着再操作一下删除,先新建个文件,跟踪并提交:
+
+ ![image-20211205141215741](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205141215741.png)
+
+看一下工作状态:
+
+ ![image-20211205141223042](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205141223042.png)
+
+提醒我们工作区是空的,这表明我们的工作区和代码仓库应急同步了
+
+然后,删除刚刚创建的文件
+
+ ![image-20211205141230915](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205141230915.png)
+
+再看一下工作状态:
+
+ ![image-20211205141236617](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205141236617.png)
+
+此时git发现我们删除了文件,
+
+注意,删除了文件,现在想将工作区与代码仓库同步就不需要add了,直接输入:
+
+ ![image-20211205141242905](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205141242905.png)
+
+这样,代码仓库的demo.txt文件也被删除了
+
+但是,如果你是收到删除文件的,那你就需要add操作一下,上面不用add是因为使用了git rm命令删除的文件,这个命令就帮助我们把操作放入暂存区,就可以直接提交了.
+
+为避免懵逼……
+
+先提一下 工作区、暂存区、本地仓库、远程仓库的关系：
+
+ ![image-20211205141252536](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205141252536.png)
+
+那你现在应该有一个新的疑问,我在本地建了文件,又要存到缓存区,还要提交到本地仓库,难道一开始文件不是建在本地仓库吗?(或者这个问题也可以这样描述: 我在本地库目录下创建文件，然后添加到暂存区，再提交到本地库，感觉这个逻辑很怪是吧，明明第一步就已经在本地库下就创建了文件，还提交干啥呢？)  现在就解答这个问题:
+
+我们输入ls来查看当前目录下有什么:
+
+ ![image-20211205141301710](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205141301710.png)
+
+你应该发现了,并没有文件.git,这就是你的工作区
+
+接着输入  ls -a
+
+ ![image-20211205141308217](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205141308217.png)
+
+这样就有了.git 虽然看起来是子同一个文件夹下,但这可不是你的工作区 这是git的本地仓库!
+
+那暂存区在哪里?
+
+打开.git文件可以看到index文件,这是git的核心文件之一,这就是暂存区
+
+ ![image-20211205141316424](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205141316424.png)
+
+懵了?为什么这样设计?
+
+附一张图,继续帮助理解
+
+ ![image-20211205141324573](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205141324573.png)
+
+在上图中，我们可以看到部分 Git 命令是如何影响工作区和暂存区（stage/index）的。 
+
+图中左侧为工作区，右侧为版本库。在版本库中标记为 "index" 的区域是暂存区 （stage/index），标记为 "master" 的是 master 分支所代表的目录树（关于分支问题暂不解释,可以先百度一下）。
+
+图中我们可以看出此时 "HEAD" 实际是指向 master 分支的一个“指针”。所以，图示的命 令中出现 HEAD 的地方可以用 master 来替换（HEAD的概念暂时不要纠结,也可以自行百度一下）。 
+
+图中的 objects 标识的区域为 Git 的对象库，实际位于 ".git/objects" 目录下
+
+当对工作区新增或修改的文件执行 "git add" 命令时，暂存区的目录树被更新，同时工作区新增或修改的文件内容被写入到对象库中的一个新的对象中，而该对象的ID被记录在暂存区的文件索引中。（如上图）
+
+当执行提交操作 "git commit" 时，暂存区的目录树写到版本库的对象库（objects）中，
+
+master 分支会做相应的更新。即 master 指向的目录树就是提交时暂存区的目录树。（如上
+
+图）
+
+当执行 "git reset HEAD" 命令时，暂存区的目录树会被重写，被 master 分支指向的目录树
+
+所替换，但是工作区不受影响。 当执行 "git rm --cached <file>" 命令时，会直接从暂存区
+
+删除文件，工作区则不做出改变。
+
+当执行 "git checkout ." 或者 "git checkout -- <file>" 命令时，会用暂存区全部或指定的文
+
+件替换工作区的文件。这个操作很危险，会清除工作区中未添加到暂存区的改动。
+
+当执行 "git checkout HEAD ." 或者 "git checkout HEAD <file>" 命令时，会用 HEAD 指
+
+向的 master 分支中的全部或者部分文件替换暂存区和以及工作区中的文件。这个命令也是极具危险性的，因为不但会清除工作区中未提交的改动，也会清除暂存区中未提交的改动。
+
+**可使用git ls-files查看暂存区的文件**
+
+说了这么多,还没有讲清楚本地仓库到底是从何而来,其实git的本地仓库就是存在.git的文件夹，因为我们在添加git的时候，会进行初始化本地库的操作：git init，最后会在当前目录下生成.git的目录，.git目录下存放的是本地库相关的文件和子目录.
+
+你也可以这样理解本地库: **我们所说的提交到本地库，更实际的是保存本次的更新版本或记录，以便之后我们可以切换到这个历史版本. 这样是不是比上面的烧脑解释好接受多了.**
+
+
+
+### 推送到远程仓库
+
+团队开发必不可少地要设计合作,线上仓库也是最常用的选择
+
+当红线上仓库无疑是GitHub了,这是国际网站,国内也有自己的线上仓库, https://gitee.com/
+
+我想,还是优先使用GitHub吧,更通用一点
+
+(这两个线上仓库都是使用git来进行操作的,不必担心git白学)
+
+GitHub基础操作:
+
+https://juejin.cn/post/6844903924458078221
+
+https://guides.github.com/activities/hello-world/
+
+Gitee(码云)基础操作:
+
+https://blizzawang.blog.csdn.net/article/details/89740085
+
+ 
+
+在看了上面的云仓库基础操作后,我相信你已经是一个内行人了
+
+在github上新建一个仓库:
+
+ ![image-20211205141721402](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205141721402.png)
+
+接着将rrd项目推到这个线上仓库来:
+
+ ![image-20211205141734706](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205141734706.png)
+
+第一次需要登录github
+
+登录后就开始上传了:
+
+成功:
+
+ ![image-20211205141743135](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205141743135.png)
+
+`git push -u origin master`上面用到的这条命令, 当文件非常多的时候，第一次提交你需要输入-u，提交过后这个-u可以省略
+
+我们去github仓库里看一下:
+
+ ![image-20211205141758530](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205141758530.png)
+
+Github提醒我们有一个提交,点击按钮比较提交和添加提交
+
+ ![image-20211205141812436](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205141812436.png)
+
+因为此处提交不在任一已存在的分支内,我们新建了一个分支master,那当然不会和之前仓库里的内容有冲突了,所有显示没什么可比较的.
+
+Ok,两行指令即可将项目推送到线上仓库,接着解释一下指令:
+
+`git remote add origin https://github.com/wzc520pyfm/fiestTest.git的意思是为仓库https://github.com/wzc520pyfm/fiestTest.git`做一个标记(起个名)为origin(随便你取)
+
+`git push -u origin master`就是把本地仓库的代码上传到云仓库的master分支下(云仓库里没有master,所有会新建一下分支叫master).
+
+ 
+
+看起来好像可以合并成一行,yes:
+
+  `git push -u https://github.com/wzc520pyfm/fiestTest.git master`
+
+(如果是从github里clone来的项目,直接git push 也可以提交到仓库)
+
+***PS: 最新的github更新已经不允许通过上文中账号密码的登录方式进行推送身份验证了, 改用安全的Token验证***
+
+具体如何操作参考:
+
+如下内容参考自 [(26条消息) 【突发】解决remote: Support for password authentication was removed on August 13, 2021. Please use a perso_日积月累，天道酬勤-CSDN博客](https://blog.csdn.net/yjw123456/article/details/119696726)
+
+如果你已有私人令牌, 只需要稍稍更改命令即可, 参考如下格式: 
+
+`git push https://你的令牌@github.com/<USERNAME>/<REPO>.git`
+
+如果你没有私人令牌, 申请方式如下: 
+
+1. 点击Settings
+
+   ![在这里插入图片描述](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/769c706985c34a6d9482bda1ef9eb82f.png)
+
+2. 点击左侧的Developer settings
+
+   ![在这里插入图片描述](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/971892ac615a4e2f9c827569bdff5931.png)
+
+3. 点击Personal access tokens(个人访问令牌)
+
+   ![在这里插入图片描述](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/watermark%252Ctype_ZmFuZ3poZW5naGVpdGk%252Cshadow_10%252Ctext_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3lqdzEyMzQ1Ng%253D%253D%252Csize_16%252Ccolor_FFFFFF%252Ct_70.png)
+
+4. ![在这里插入图片描述](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/watermark%252Ctype_ZmFuZ3poZW5naGVpdGk%252Cshadow_10%252Ctext_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3lqdzEyMzQ1Ng%253D%253D%252Csize_16%252Ccolor_FFFFFF%252Ct_70-16386855404225.png)
+
+5. 设置token信息
+
+   ![在这里插入图片描述](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/5157223b935141658fc0d2ecfae819e3.png)
+
+   ![在这里插入图片描述](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/watermark%252Ctype_ZmFuZ3poZW5naGVpdGk%252Cshadow_10%252Ctext_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3lqdzEyMzQ1Ng%253D%253D%252Csize_16%252Ccolor_FFFFFF%252Ct_70-163868557970111.png)
+
+   点击Generate token生成令牌
+
+6. 得到生成的令牌
+
+   ![在这里插入图片描述](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/watermark%252Ctype_ZmFuZ3poZW5naGVpdGk%252Cshadow_10%252Ctext_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3lqdzEyMzQ1Ng%253D%253D%252Csize_16%252Ccolor_FFFFFF%252Ct_70-163868560718513.png)
+
+#### 应用令牌
+
+将生成的令牌拷贝下来(不要拷贝我的，拷贝你自己生成的!)，记得保存，下次你就看不到了。
+
+修改现有项目的url
+
+`git remote set-url origin  https://<your_token>@github.com/<USERNAME>/<REPO>.git`
+将<your_token>换成你自己得到的令牌。<USERNAME>是你自己github的用户名，<REPO>是你的项目名称，比如我的：
+
+```markdown
+git remote set-url origin  https://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@github.com/nlp-greyfoss/typora_notes.git/
+```
+
+其实上面的报错中就有提示，不需要重新去找：
+
+```markdown
+fatal: unable to access 'https://github.com/<USERNAME>/<REPO>.git
+```
+
+`https://你的令牌@ github.com/<USERNAME>/<REPO>.git`
+
+然后再执行`git pull`，世界又恢复原样了。
+
+##### 船新版本
+对于全新版本，克隆的时候也在github.com前面加个令牌就好了。
+
+`git clone https://<TOKEN>@github.com/<user_name>/<repo_name>.git`
+
+------------------------------------------------
+版权声明：本文为CSDN博主「愤怒的可乐」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/yjw123456/article/details/119696726
+
+
+
+### 团队合作
+
+要合作总得把你的朋友(name:huofu)添加云仓库的开发者,github你已经会了(项目->Setting->Manage access->输入登录密码->![image-20211205143428680](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205143428680.png)->输入”huofu”,然后huofu上线同意邀请即可),
+
+gitee是这样的:
+
+项目->管理->项目成员管理->开发者->添加项目成员->输入"huofu"
+
+我们新建一个文件夹命名为huofu_work, 来模拟新用户操作,并进入这个文件夹, 
+
+ ![image-20211205143459680](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205143459680.png)
+
+我们将云仓库的项目克隆到本地
+
+ ![image-20211205143508776](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205143508776.png)
+
+哦哦,忘了,我们之前再上传时新建了一个分支,删去下载的文件,执行:
+
+ ![image-20211205143517233](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205143517233.png)
+
+现在我们把第一个用户推上去的项目下载了下来,姑且叫他管理员,那第二个用户就是开发者了
+
+在这里新建一个文件,随便输入一些内容,并提交到仓库:
+
+ ![image-20211205143525819](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205143525819.png)
+
+Github已经发现我们提交了代码,并提醒我们:
+
+ ![image-20211205143530142](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205143530142.png)
+
+因为使用的是同一台电脑提醒,github服务器会认为你是同一个人(因为在同一台电脑上,在用户管理上有一个用户凭证管理器,里面第一次记录的是管理员账户,假如说你使用了别人的电脑,想要自己提交时显示自己的用户名提交,你就需要在这里更改一下)
+
+回到第一个用户的工作目录:
+
+ ![image-20211205143540743](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205143540743.png)
+
+与云仓库不一致,这是因为还没有更新,我们进入这个目录,执行git pull origin master
+
+ ![image-20211205143549087](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205143549087.png)
+
+这样就和线上仓库一致了
+
+
+
+### 日志查看与版本切换
+
+对于git使用者来说,必须了解3个区域:
+
+* 工作区：即开发者的工作目录
+
+* 暂存区：修改已被记录，但尚未录入版本库的区域
+
+* 版本库：存储变化日志及版本信息
+
+当你在工作区进行开发工作时，git会记录你的改动，此时，你使用git add指令，该工作区的内容会被加入到暂存区，你仍然可以对你提交的文件进行撤回操作，然后你使用git commit指令，暂存区的内容会被提交到版本库。
+
+每个文件/目录发生的版本变化,我们都可以追溯,命令为git log
+
+`git log` 查看项目的日志
+`git log` 查看某文件的日志
+`git log . `查看本目录的日志
+
+如果感觉日志有点乱，可以输入
+
+`git log --pretty=oneline`
+
+![image-20211205143740316](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205143740316.png)
+
+Emmm…可以看到我们对项目进行了五次修改,
+
+接着来实操一下版本切换:
+
+现在将版本回退到最初是的时候:
+
+`git reset --hard HEAD^^^^`
+
+ ![image-20211205143755547](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205143755547.png)
+
+你想回退几个版本就输入几个`^`符号。
+
+去看一下目录,已经是最初版
+
+ ![image-20211205143814102](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205143814102.png)
+
+该指令只能用来回退版本，而且它不能清楚地知道指针的指向。所以我们用版本号来进行版本的切换。
+ 版本号很长，但是我们不需要写出全部的版本号，只需要你写的版本号与别的版本不一致就可以。
+ 我们输入`git reset --hard 14f3c` (14f3c来自这里:  ![image-20211205143831982](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205143831982.png)
+
+)
+
+![image-20211205143855723](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205143855722.png)
+
+已经切换到对应的版本了,
+
+接下来切换到最初版本:
+
+ ![image-20211205143905926](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205143905926.png)
+
+再输入`git log --pretty=oneline`
+
+ ![image-20211205143913418](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205143913418.png)
+
+发现输出日志只显示了第一次提交的日志,那这样就拿不到其他次提交的版本号,我该怎么版本切换?
+
+现在输入: `git reflog`
+
+ ![image-20211205143927713](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205143927713.png)
+
+这样就可以看到所有的版本号了!!!!!!!!!
+
+### 分支管理
+
+在开发中，遇到这样的情况怎么办？
+网站已有支付宝在线支付功能，要添加"微信支付"，修改了两个文件，wechat.php、pay.php。
+刚做到一半，突然有个紧急bug：支付宝支付后不能修改订单状态。你需要立即马上修改这个bug，需要修改的文件是，ali.php、pay.php。
+问题是，pay.php文件，已经被你修改了过，而且尚未完成，直接在此基础上改，肯定有问题。把pay.php倒回去？那我之前的工作白费了。
+此时你肯定会想：在做"微信支付"时，能否把仓库复制一份，不影响原仓库的内容，修改完毕后，再把副本上的修改合并过去。
+好的，这时你已经有了分支的思想。
+前面见过的master，即是代码的主干分支。
+事实上，在实际的开发中，往往不会直接修改和提交到master分支上，而是创建一个dev分支，在dev分支上，修改测试，再把dev分支合并到master上。
+如果有了分支，刚才的难题就好解决了。
+在做"微信支付"时，我们创建一个wechat分支，把wechat分支commit，此时，master分支内容不会改变，因为分支不同。
+当遇到紧急bug时，创建一个AliBug分支，修复bug后，把AliBug分支合并到master分支上。
+再次从容切换到wechat分支上，接着开发"微信支付"功能，开发完毕后，把wechat分支合并到master分支上。
+
+下面介绍分支:
+
+查看所有分支`git branch`
+
+![image-20211205144206907](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205144206907.png)
+
+看起来我们只有master分支, 且当前处在master分支上,` * `号代表当前所处的位置
+
+创建分支`git branch wechat`
+
+并查看分支(`git branch`)
+
+ ![image-20211205144231881](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205144231881.png)
+
+ 我们有两个分支了
+
+切换分支: `git checkout wechat`
+
+ ![image-20211205144447362](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205144447362.png)
+
+Ok,现在处于wechat分支上了
+
+我们随便在这个分支上做一下修改,比如新建一个config.txt,并输入一些内容
+
+然后看一下工作状态:
+
+ ![image-20211205144502314](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205144502314.png)
+
+Git提醒我们工作区有变动
+
+因为我们修改了config文件, 但此时，master分支上有一个紧急的bug需要你去处理，这时，你就得把手头上的工作保存起来，然后去处理bug。
+
+我们将工作保存到本地仓库
+
+`git add .`
+
+`git commit -m "wechat todo"`
+
+ ![image-20211205144522184](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205144522184.png)
+
+好了,我们在wechat分支上的工作已经保存好了,
+
+接下来,切换回master分支
+
+ ![image-20211205144529188](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205144529188.png)
+
+嘻嘻,输入ls查看当前文件目录下的内容,你可以发现刚刚的config不见了,这正是我们要的效果
+
+接下来在创建一个分支用于修复bug并切换到这个分支
+
+ ![image-20211205144542144](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205144542144.png)
+
+在这个分支下同样进行一些操作,来模拟修复bug.
+
+比如创建一个文件allli.txt,随便写一些内容
+
+ ![image-20211205144549191](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205144549191.png)
+
+假设我们已经修复好了bug,那么现在就将修改的内容提交到该分支的本地仓库
+
+ ![image-20211205144554163](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205144554163.png)
+
+然后就是将该分支合并到master分支上(这很合理,修复完了bug重要应该到实际去)
+
+先切换到master分支,然后输入  `git merge ali`
+
+ ![image-20211205144610932](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205144610932.png)
+
+现在, 在ali分支上进行的文件修改操作就都能在工作目录中被找到了。
+
+这时候，我们又可以切回到wechat分支，进行我们刚才未完成的工作。当完成后，我们就可以将该条分支也合并到master分支上
+
+当完成修复bug工作后,ali分支就没用了,我们可以删除它
+
+删除分支:
+
+`git branch -d ali`
+
+ ![image-20211205144645912](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205144645912.png)
+
+注意哈,我们进行的修改最终是保存在本地仓库,要上传云仓库还需要最后一步
+
+ ![image-20211205144659062](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205144659062.png)
+
+(云仓库也可创建分支,而且是图形方式,更加容易一点,但那时云仓库的,作为开发人员,本地操作是必不可少的技能)
+
+注意了，当我们在两个分支上修改了同一个内容时，在master分支上进行合并的时候，就会产生冲突，因为此时git无法确定你需要的是哪个版本的信息。
+
+![image-20211205144723517](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205144723517.png)
+
+ 红色框线内的意思是说，编码config.txt，冲突(内容):config.txt中的合并冲突，自动合并失败;修复冲突，然后提交结果。我们看一下冲突的文件。
+
+![image-20211205144738388](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205144738388.png)
+
+ 我们来解决一下冲突，如果我们对着三个值都需要的话，我们就直接把标记删了就行，如果哪个不需要，就把不需要的值删了，这里我就都留着了。
+
+![image-20211205144749741](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205144749741.png)
+
+ 修改完成，我们重新提交一下就可以了。
+
+
+
+### 入门最后一篇—远程仓库配置和配置公钥免密登录
+
+查看远程仓库`git remote -v`
+
+![image-20211205145049087](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205145049087.png)
+
+删除远程库(放心,大胆执行)`git remote remove origin`
+
+ ![image-20211205145059729](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205145059729.png)
+
+再次查询为空
+
+ ![image-20211205145106181](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205145106181.png)
+
+注意了，这样并不会把远程库真的删除了，这样只是删除了远程库地址的别名。
+ 我们重新添加一个远程库的标记，并推送一下
+
+ ![image-20211205145115099](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205145115099.png)
+
+这样又可以查到远程仓库了
+
+**但我们有一个痛点,每次推送的时候都要重新输入用户名和密码,太烦了(下面内容仅供参考)**
+
+现在来配置一下公钥从而免密登录
+
+如果想这样的话，我们的地址就应该换掉，因为HTTPS是不走443端口的，所以我们把地址换成SSH地址。
+
+先检查一下我们有没有ssh
+
+ ![image-20211205145215836](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205145215836.png)
+
+看来没有
+
+我们生成一个新ssh密钥
+
+`ssh-keygen -t ed25519 -C "your_email@example.com"`
+
+ ![image-20211205145236888](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205145236888.png)
+
+这将创建以所提供的电子邮件地址为标签的新 SSH 密钥。
+
+> Generating public/private ed25519 key pair.
+
+提示您“Enter a file in which to save the key（输入要保存密钥的文件）”时，按 Enter 键。 这将接受默认文件位置。
+
+一直回车
+
+git会帮你把信息保存到C:/Users/blizzawang/.ssh/id_rsa.pub
+ 我们可以去该目录寻找。
+
+![image-20211205145312518](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205145312518.png)
+
+[将 SSH 密钥添加到 ssh-agent](https://docs.github.com/cn/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#adding-your-ssh-key-to-the-ssh-agent)
+
+```
+eval `ssh-agent -s`
+```
+
+ ![image-20211205145322130](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205145322130.png)
+
+将SSH公钥复制到剪贴板
+
+ ![image-20211205145335040](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205145335040.png)
+
+接着去github网站
+
+ ![image-20211205145339417](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205145339417.png)
+
+ ![image-20211205145345541](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205145345541.png)
+
+ ![image-20211205145351682](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205145351682.png)
+
+ ![image-20211205145425591](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205145425591.png)
+
+单击 ![image-20211205145430752](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205145430752.png)
+
+ ![image-20211205145439300](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205145439300.png)
+
+OK现在我们有ssh了
+
+ ![image-20211205145450098](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205145450098.png)
+
+复制这个地址, 然后在git控制台输入指令
+
+ ![image-20211205145455082](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205145455082.png)
+
+最后那一长串是我们刚刚复制的内容
+
+这样，我们的地址就添加完成了
+
+测试ssh连接:
+
+```
+ssh -T git@github.com
+```
+
+ ![image-20211205145513836](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205145513836.png)
+
+1. 您可能会看到类似如下的警告：
+
+2. > The authenticity of host 'github.com (IP ADDRESS)' can't be established.
+
+3. > RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8.
+
+> Are you sure you want to continue connecting (yes/no)?
+
+4. 验证所看到消息中的指纹是否匹配 [GitHub 的 RSA 公钥指纹](https://docs.github.com/cn/github/authenticating-to-github/githubs-ssh-key-fingerprints)。 如果是，则输入 yes：
+
+5. > Hi *username*! You've successfully authenticated, but GitHub does not
+
+> provide shell access.
+
+使用 SSH 密钥时，如果有人获得您计算机的访问权限，他们也可以使用该密钥访问每个系统。 要添加额外的安全层，可以向 SSH 密钥添加密码。 您可以使用 `ssh-agent` 安全地保存密码，从而不必重新输入。
+
+通过输入以下命令，您可以更改现有私钥的密码而无需重新生成密钥对：
+
+> $ ssh-keygen -p -f ~/.ssh/id_ed25519
+
+> Enter old passphrase: *[Type old passphrase]*
+
+> Key has comment '*your_email@example.com*'
+
+> Enter new passphrase (empty for no passphrase): *[Type new passphrase]*
+
+> Enter same passphrase again: *[Repeat the new passphrase]*
+
+> Your identification has been saved with the new passphrase.
+
+在**Git for Windows**上自动启动ssh-agent:
+
+进入 `/c/Users/username `路径下
+
+然后，输入`1touch ~/.profile`
+
+在路径下 `/c/Users/username `路径下创建一个` .profile` 文件和`.bashrc`文件
+
+如果此路径下已经有这个文件，则无需新建。
+
+**设置**`.profile`
+
+使用文本编辑器打开 `.profile`，将以下内容粘贴到其中保存。
+
+您可以在打开 bash 或 Git shell 时自动运行 `ssh-agent`。 复制以下行并将其粘贴到 Git shell 中的 `~/.profile` 和 `~/.bashrc` 文件中：
+
+```
+env=~/.ssh/agent.env
+agent_load_env () { test -f "$env" && . "$env" >| /dev/null ; }
+agent_start () {
+
+  (umask 077; ssh-agent >| "$env")
+
+  . "$env" >| /dev/null ; }
+agent_load_env
+
+# agent_run_state: 0=agent running w/ key; 1=agent w/o key; 2= agent not running
+
+agent_run_state=$(ssh-add -l >| /dev/null 2>&1; echo $?)
+
+if [ ! "$SSH_AUTH_SOCK" ] || [ $agent_run_state = 2 ]; then
+
+  agent_start
+
+  ssh-add
+
+elif [ "$SSH_AUTH_SOCK" ] && [ $agent_run_state = 1 ]; then
+
+  ssh-add
+
+fi
+
+unset env
+```
+
+然后重启Git Bash
+
+是这样的 
+
+ ![image-20211205150255906](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205150255906.png)
+
+官方手册是这样的 
+
+ ![image-20211205150301076](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205150301076.png)
+
+Emmm…..
+
+这个密码可能是这个(一次不经意的尝试,,成功了):
+
+ ![image-20211205150311339](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205150311339.png)
+
+将里面的内容输入后,成功了:
+
+ ![image-20211205150318518](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205150318518.png)
+
+
+
+### 附录:
+
+echo 字符串 > 文件名.扩展名 可以将字符串输入到后边指定的文件中
+
+![image-20211205150346195](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205150346195.png)
+
+
+
+官网新建项目后的提示: 基本够用了, 分支切换和记录切换就看上文吧
+
+![image-20211205150404277](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211205150404277.png)
+
+### git操作总结
+
+初始化仓库                           		`git init`
+
+查看工作区状态                       	 `git status`
+
+跟踪所有文件到暂存区                 `git add .`
+
+文件提交到本地仓库                     `git commit -m "此版本简介"`
+
+将仓库文件推送到远程仓库:  
+
+1. `git remote add origin https//github.com/用户名/仓库.git`
+
+2. `git push -u origin master (master是分支名)`
+
+3. 如果不是第一次push, 则只需`git push`即可.
+
+4. 如果是从github里clone来的项目,直接执行`git push`即可
+
+从云仓库克隆项目到本地: 
+
+  a. `git clone https://云仓库地址.git` (这会克隆云仓库当前的分支到本地)
+
+  b. `git clone https://云仓库地址.git master `(这会克隆云仓库的master分支到本地)
+
+将本地工作区内容与云仓库内容同步    `git pull origin master` (同步云仓库master分支)
+
+查看本地仓库版本号                   `git log --pretty=online`
+
+切换到对应的版本             `git reset –hard 14f3c`  (14f3c是某一版本号的前5位)
+
+查看当前版本之后的版本的版本号		 `git reflog`
+
+查看本地所有分支                `git branch`
+
+创建新分支               		    `git branch wechat` (创建了明文wechat的新分支)
+
+切换分支                   		   `git checkout wechat` (切换到wechat分支)
+
+合并分支              	            `git merge wechat`  (将当前分支与wechat分支进行合并)
+
+如果两个分支都对同一内容进行了修改,合并时会给你提示,并标记处冲突的位置, 你可以根据你的需要手动进行保留或删除.
+
+删除分支                    `git branch -d wechat`(删除wechat分支)
+
+查看标记的远程仓库      	      `git remote -v`
+
+删除远程仓库标记(别名)         `git remote remove origin`
+
+新建远程仓库标记(别名)         `git remote add origin https://仓库地址.git` 
+
+解决VSCode不显示远程仓库分支  `git remote update origin --prune`
+
+本地代码与云仓库同步: `git pull origin main`
+
