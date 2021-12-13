@@ -1,3 +1,14 @@
+---
+layout: post
+title: 'Vue_Element_ECharts笔记'
+subtitle: '用vue+elementUI+echarts做一个后台管理项目'
+date: 2021-12-5
+categories: 技术
+author: lalala
+cover: ''
+tags: 前端
+---
+
 ### 使用vue-cli3.x的UI可视化界面创建项目
 
 1. vue ui
