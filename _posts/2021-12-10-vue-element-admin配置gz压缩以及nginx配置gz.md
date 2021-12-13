@@ -1,3 +1,14 @@
+---
+layout: post
+title: 'vue-element-admin配置gz压缩以及nginx配置gz'
+subtitle: '项目打包体积太大? gz压缩让其减小三分之二!'
+date: 2021-12-10
+categories: 技术
+author: lalala
+cover: ''
+tags: 前端
+---
+
 ### vue-element-admin配置gz压缩以及nginx配置gz
 
 #### vue项目配置:
