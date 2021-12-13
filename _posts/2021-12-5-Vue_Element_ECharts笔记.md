@@ -6,7 +6,7 @@ date: 2021-12-5
 categories: 技术
 author: lalala
 cover: ''
-tags: 前端
+tags: 前端学习记
 ---
 
 ### 使用vue-cli3.x的UI可视化界面创建项目
