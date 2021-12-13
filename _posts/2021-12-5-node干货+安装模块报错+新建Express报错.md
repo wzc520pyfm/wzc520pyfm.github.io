@@ -1,3 +1,14 @@
+---
+layout: post
+title: 'node干货+安装模块报错+新建Express报错'
+subtitle: '记录踩坑,和学习干货'
+date: 2021-12-5
+categories: 技术
+author: lalala
+cover: ''
+tags: 后端
+---
+
 ### node
 
 查看node版本:  node -v
