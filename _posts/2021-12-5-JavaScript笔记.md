@@ -1,3 +1,14 @@
+---
+layout: post
+title: 'JavaScript笔记'
+subtitle: 'js学习笔记'
+date: 2021-12-5
+categories: 技术
+author: lalala
+cover: ''
+tags: 前端
+---
+
 [TOC]
 
 
