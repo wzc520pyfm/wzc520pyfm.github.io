@@ -75,7 +75,7 @@ kramdown:
   input: GFM
 
 # RSS
-RSS: true
+RSS: false
 
 # Permalink
 # See: https://github.com/kaeyleo/jekyll-theme-H2O/issues/35
