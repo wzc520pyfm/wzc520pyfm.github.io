@@ -7,7 +7,7 @@ layout: null
     <title>{{ site.title | xml_escape }}</title>
     <description>{{ site.description | xml_escape }}</description>
     <link>{{ site.url }}{{ "/" | relative_url }}/</link>
-    <atom:link href="{{ "/feed.xml" | relative_url | prepend: site.url }}" rel="self" type="application/rss+xml" />
+    <atom:link href="{{ "rss.xml" | relative_url | prepend: site.url }}" rel="self" type="application/rss+xml" />
     <pubDate>{{ site.time | date_to_rfc822 }}</pubDate>
     <lastBuildDate>{{ site.time | date_to_rfc822 }}</lastBuildDate>
     <generator>Jekyll v{{ jekyll.version }}</generator>
