@@ -1,0 +1,100 @@
+---
+layout: post
+title: 'jekyll如何为自己的博客添加RSS订阅'
+subtitle: '你写好了博客,如何通知别人呢?这需要网站支持RSS订阅'
+date: 2021-12-16
+categories: 技术
+author: lalala
+cover: ''
+tags: Blog
+---
+
+
+
+### 1. 在_config.yml文件 添加下列属性：
+
+```yaml
+name:         blog Name  
+description:  A description for your blog  
+url:          http://your-blog-url.com  
+```
+
+* 这些值{{ site.name }}，{{ site.description }}，{{ site.url }}会在你的feed文件里用到。
+
+### 2、在网站根目录下添加 feed.xml
+
+```xml
+---
+layout: none
+---
+
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" title="XSL Formatting" href="/rss.xsl" media="all" ?>
+
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>{{ site.name }}</title>
+        <description>{{ site.description }}</description>
+        <link>{{ site.baseurl}}{{ site.url }}</link>
+        <atom:link href="{{ site.baseurl}}{{ site.url }}/feed.xml" rel="self" type="application/rss+xml" />
+        {% for post in site.posts %}
+            <item>
+                <title>{{ post.title }}</title>
+                <description>{{ post.content | xml_escape }}</description>
+                <pubDate>{{ post.date | date: "%a, %d %b %Y %H:%M:%S %z" }}</pubDate>
+                <link>{{ site.url }}{{ site.baseurl}}{{ post.url }}</link>
+                <guid isPermaLink="true">{{ site.url }}{{ site.baseurl}}{{ post.url }}</guid>
+            </item>
+        {% endfor %}
+    </channel>
+</rss>
+```
+
+* 在你网站的合适地方添加如下代码：
+
+  ```html
+  <a href="{{ site.url }}/feed.xml">RSS订阅</a>  
+  ```
+
+  这只是一个跳转链接, 你可以自定义样式, 或者把里面的 'RSS订阅' 文字换成图标
+
+  `href`里的路径拼接: 你在`_config.yml`里设置的url加上feed.xml
+
+如果你想体验效果的话, 直接访问我的博客即可, 在我的个人介绍里的SRR图标就是.
+
+![image-20211215234256696](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211215234256696.png)
+
+
+
+参考: 
+
+[Jekyll博客添加RSS feed订阅功能 - 简书 (jianshu.com)](https://www.jianshu.com/p/da39860bb5f5)
+
+
+
+### 3.如何订阅RSS资源?
+
+你的网站支持了RSS订阅, 但用户不懂这种订阅方式怎么办? 这里也顺带整理一下如何使用RSS订阅.
+
+首先需要一个阅读器, eage浏览器装个扩展就好了, 简单又方便. 这里推荐: 
+
+[RSSHub Radar - Microsoft Edge Addons](https://microsoftedge.microsoft.com/addons/detail/rsshub-radar/gangkeiaobmjcjokiofpkfpcobpbmnln?hl=zh-CN)
+
+![image-20211215234819174](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211215234819174.png)
+
+安装好后, 进入扩展设置, 勾选: 
+
+![image-20211215234853964](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211215234853964.png)
+
+这个阅读器加载快而且界面美观.
+
+接下来当你打开别人博客的RSS时, 就会看到:
+
+![image-20211215234955723](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211215234955723.png)
+
+点击订阅后, 会跳转到: 
+
+![image-20211215235041834](https://cdn.jsdelivr.net/gh/wzc520pyfm/Picbed_PicGo@master/img/image-20211215235041834.png)
+
+注册并登录后, 点击Follow即可订阅作者.
+
