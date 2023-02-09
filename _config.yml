@@ -58,6 +58,7 @@ postPatterns: 'circuitBoard'
 sns:
   email: 'https://www.wzc520pyf.cn/2021/03/30/wzc520pyf@qq.com.html'
   github: '//github.com/wzc520pyfm'
+  juejin: 'https://juejin.cn/user/4358896987149326/posts'
 
 # Tags 设置标签
 recommend-tags: true # whether or not display recommend-tags on the sidebar
